@@ -2,18 +2,61 @@
   "name": "touristapp_server",
   "version": "1.0.0",
   "description": "this app purpose is to help users to acknowledge their carbon footprint during their travels/commutes. ",
-  "main": "App.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --no-cache ./tests/*",
+    "start": "babel-node ./server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/touristapp/touristapp_server.git"
   },
+  "keywords": [
+    "heroku"
+  ],
   "author": "st2diio",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/touristapp/touristapp_server/issues"
   },
-  "homepage": "https://github.com/touristapp/touristapp_server#readme"
+  "homepage": "https://github.com/touristapp/touristapp_server#readme",
+  "dependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/register": "^7.4.4",
+    "@sendgrid/mail": "^6.4.0",
+    "ansi-regex": "^4.1.0",
+    "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
+    "bcrypt": "^3.0.0",
+    "body-parser": "^1.19.0",
+    "circular-json": "^0.5.9",
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "fs": "0.0.1-security",
+    "iconv-lite": "^0.4.24",
+    "jest": "^24.7.1",
+    "jsonwebtoken": "^8.5.1",
+    "marked": "^0.6.2",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "pg": "^7.11.0",
+    "request": "^2.88.0",
+    "sendgrid": "^5.2.3",
+    "sequelize": "^5.8.2",
+    "supertest": "^4.0.2"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "sequelize-test-helpers": "^1.1.0"
+  },
+  "engines": {
+    "node": "12.1.0"
+  }
 }
