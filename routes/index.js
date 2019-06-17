@@ -13,6 +13,7 @@ api.get("/", (req, res) => {
   });
 });
 
-api.use("/", passport.authenticate("jwt", { session: false }), secured);
+api.use("api/", secured);
+// api.use("/", passport.authenticate("jwt", { session: false }), secured);
 
 export default api;
