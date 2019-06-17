@@ -5,7 +5,7 @@ import app from './App';
 
 iconv.encodings = encodings;
 require('dotenv').config();
-const port = process.env.PORT;
+const port = process.env.PORT || 8080 ;
 
 // if (process.env.NODE_ENV) {
 //   db.sync({ force: false }); // true: drops all tables first
