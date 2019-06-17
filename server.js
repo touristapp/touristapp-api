@@ -1,6 +1,6 @@
 import iconv from 'iconv-lite';
 import encodings from 'iconv-lite/encodings';
-import app from './app';
+import app from './App';
 // import { db } from './database/initdb';
 
 iconv.encodings = encodings;
