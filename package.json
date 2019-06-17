@@ -1,0 +1,19 @@
+{
+  "name": "touristapp_server",
+  "version": "1.0.0",
+  "description": "this app purpose is to help users to acknowledge their carbon footprint during their travels/commutes. ",
+  "main": "App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/touristapp/touristapp_server.git"
+  },
+  "author": "st2diio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/touristapp/touristapp_server/issues"
+  },
+  "homepage": "https://github.com/touristapp/touristapp_server#readme"
+}
