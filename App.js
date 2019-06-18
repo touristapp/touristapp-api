@@ -4,6 +4,7 @@ import passport from "passport";
 import cors from "cors";
 import marked from "marked";
 import fs from "fs";
+import api from "./routes"
 
 const app = express();
 
@@ -17,5 +18,7 @@ app.get("/", (request, response) => {
   const file = fs.readFileSync("./README.md", 'utf8');
   response.send(marked(file.toString()));
 });
+
+app.use("/api", api);
 
 module.exports = app;
