@@ -2,6 +2,35 @@
 
 ## APIs
 
+---
+
+### Config Vars
+
+#### .env 
+
+```
+NODE_ENV=dev
+PORT= YOUR_PORT
+
+URI = db_url
+```
+
+#### config.json
+
+```
+{
+    "dev": {
+      "dialect": "postgres",
+      "database": "DATABASE",
+      "port": 5432,
+      "user": "YOUR_USERNAME",
+      "password": "YOUR_PASSWORD"
+    }
+}
+```
+
+---
+
 ### SERVER API Endpoints
 
 
@@ -34,20 +63,20 @@
 |--------------|--------------------------------|-----------------------------------------------------------|-------|------|
 | **GET**      | `/api/travel/`                 | { id_user, done }                                         | token | no   |
 | **GET**      | `/api/travel/:id`              |                                                           | token | no   |
-| **POST**     | `/api/travel/`                 | { id_user, departure, destination, carbonFootprint, conso, id_fuel, distance, duration, id_typeTravel } | token | no   |
-| **PUT**      | `/api/travel/:id`              | { id_user, departure, destination, carbonFootprint, conso, id_fuel, distance, duration, id_typeTravel } | token | no   |
+| **POST**     | `/api/travel/`                 | { id_user, departure, destination, carbonFootprint, distance, duration, id_vehicle } | token | no   |
+| **PUT**      | `/api/travel/:id`              | { id_user, departure, destination, carbonFootprint, distance, duration, id_vehicle } | token | no   |
 | **DELETE**   | `/api/travel/`                 | { id_user, done }                                         | token | no   |
 | **DELETE**   | `/api/travel/:id`              |                                                           | token | no   |
 
 ---
 
-- **USER_VEHICLE ENDPOINT**
+- **VEHICLE ENDPOINT**
 
 | method       | endpoint                       | body                                                      |  auth | done |
 |--------------|--------------------------------|-----------------------------------------------------------|-------|------|
-| **GET**      | `/api/vehicle/`                | { id_user }                                               | token | no   |
-| **POST**     | `/api/vehicle/`                | { id_user, conso, id_fuel }                               | token | no   |
-| **PUT**      | `/api/vehicle/:id`             | { id_user, conso, id_fuel }                               | token | no   |
+| **GET**      | `/api/vehicle/:id`             |                                                           | token | no   |
+| **POST**     | `/api/vehicle/`                | { id_fuel, conso }                                        | token | no   |
+| **PUT**      | `/api/vehicle/:id`             | { id_fuel, conso }                                        | token | no   |
 | **DELETE**   | `/api/vehicle/:id`             |                                                           | token | no   |
 
 ---
@@ -57,7 +86,7 @@
 | method       | endpoint                       | body                                                      |  auth | done |
 |--------------|--------------------------------|-----------------------------------------------------------|-------|------|
 | **GET**      | `/api/fuel/`                   |                                                           | token | no   |
-| **POST**     | `/api/fuel/`                   | { name }                                                  | token | no   |
+| **POST**     | `/api/fuel/`                   | { name, carbonFootprint }                                 | token | no   |
 | **DELETE**   | `/api/fuel/:id`                |                                                           | token | no   |
 
 ---
