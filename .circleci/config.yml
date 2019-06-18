@@ -15,6 +15,12 @@ jobs:
       # - image: circleci/mongo:3.4.4
 
     working_directory: ~/repo
+    
+    general:
+      branches:
+        only:
+          - develop # list of branches to build
+          - /feature-.*/ # or regexes
 
     steps:
       - checkout
