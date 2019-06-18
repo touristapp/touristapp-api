@@ -1,4 +1,5 @@
 import { Sequelize } from 'sequelize';
+import fs from 'fs';
 
 const config = fs.existsSync(__dirname.replace('\\','/')+'/config.json') ? require('./config.json').dev : null;
 export const db = (config) ? new Sequelize(
@@ -7,13 +8,12 @@ export const db = (config) ? new Sequelize(
     config.password,
     {
         dialect: config.dialect,
-        host: config.host,
         port: config.port,
         logging: console.log,
         define: {
             timestamps: false
         }
-    }) : new Sequelize()
+    }) : new Sequelize(process.env.URI, {logging: false});
 
 db.authenticate()
     .then( (err)=> {console.log('Connection has been establihed successfully.');
