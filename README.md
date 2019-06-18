@@ -2,6 +2,35 @@
 
 ## APIs
 
+---
+
+### Config Vars
+
+#### .env 
+
+```
+NODE_ENV=dev
+PORT= YOUR_PORT
+
+URI = db_url
+```
+
+#### config.json
+
+```
+{
+    "dev": {
+      "dialect": "postgres",
+      "database": "DATABASE",
+      "port": 5432,
+      "user": "YOUR_USERNAME",
+      "password": "YOUR_PASSWORD"
+    }
+}
+```
+
+---
+
 ### SERVER API Endpoints
 
 
