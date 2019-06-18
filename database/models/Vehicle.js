@@ -6,7 +6,7 @@ export default class Vehicle extends Model {
     return super.init(
       {
         conso: {
-          type: Sequelize.FLOAT,
+          type: Sequelize.FLOAT(10, 2),
         },
         createdAt: {
           type: Sequelize.DATE(3),
