@@ -1,6 +1,5 @@
-import Sequelize from "sequelize";
+import Sequelize, { Model } from "sequelize";
 import bcrypt from "bcrypt";
-
 
 export default class User extends Model {
   static init(database){

@@ -3,7 +3,7 @@ import fs from 'fs';
 import User from './models/user';
 import Travel from './models/travel';
 import Option from './models/Option';
-import Vehicle from './models/Vehicle';
+import Vehicule from './models/Vehicule';
 import Fuel from './models/Fuel';
 
 
@@ -29,15 +29,15 @@ db.authenticate()
 
 User.init(db);
 Travel.init(db);
-Vehicle.init(db);
+Vehicule.init(db);
 Fuel.init(db);
 Option.init(db);
 
-User.belongsTo(Vehicle);
-Vehicle.hasMany(User);
+User.belongsTo(Vehicule);
+Vehicule.hasMany(User);
 
-Vehicle.belongsTo(Fuel);
-Fuel.hasMany(Vehicle);
+Vehicule.belongsTo(Fuel);
+Fuel.hasMany(Vehicule);
 
 Travel.belongsToMany(User);
 User.hasMany(Travel);

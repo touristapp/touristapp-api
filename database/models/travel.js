@@ -1,4 +1,4 @@
-import Sequelize from 'sequelize';
+import Sequelize, { Model } from "sequelize";
 
 export default class Travel extends Model {
     static init(database){
