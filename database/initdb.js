@@ -11,18 +11,20 @@ const config = fs.existsSync(__dirname.replace('database','config')+'/config.jso
 console.log('=================');
 console.log(process.env.URI);
 
-export const db = (config) ? new Sequelize(
-    config.database,
-    config.user,
-    config.password,
-    {
-        dialect: config.dialect,
-        port: config.port,
-        logging: console.log,
-        define: {
-            timestamps: false
-        }
-    }) : new Sequelize(process.env.URI, {logging: false});
+// export const db = (config) ? new Sequelize(
+//     config.database,
+//     config.user,
+//     config.password,
+//     {
+//         dialect: config.dialect,
+//         port: config.port,
+//         logging: console.log,
+//         define: {
+//             timestamps: false
+//         }
+//     }) : new Sequelize(process.env.URI, {logging: false});
+
+export const db = new Sequelize(process.env.URI);
 
 db.authenticate()
     .then( (err)=> {console.log('Connection has been establihed successfully.');
