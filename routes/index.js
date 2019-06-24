@@ -1,5 +1,6 @@
 import { Router } from "express";
 import secured from "./secured";
+import auth from "./auth"
 
 const api = Router();
 
@@ -13,6 +14,7 @@ api.get("/", (req, res) => {
   });
 });
 
+api.use("/auth", auth)
 api.use("/", secured);
 // api.use("/", passport.authenticate("jwt", { session: false }), secured);
 
