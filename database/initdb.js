@@ -3,7 +3,7 @@ import fs from 'fs';
 import User from './models/user';
 import Travel from './models/travel';
 import Option from './models/Option';
-import Vehicule from './models/Vehicule';
+import Vehicle from './models/Vehicle';
 import Fuel from './models/Fuel';
 require('dotenv').config();
 
@@ -34,15 +34,15 @@ db.authenticate()
 
 User.init(db);
 Travel.init(db);
-Vehicule.init(db);
+Vehicle.init(db);
 Fuel.init(db);
 Option.init(db);
 
-User.belongsTo(Vehicule);
-Vehicule.hasMany(User);
+User.belongsTo(Vehicle);
+Vehicle.hasMany(User);
 
-Vehicule.belongsTo(Fuel);
-Fuel.hasMany(Vehicule);
+Vehicle.belongsTo(Fuel);
+Fuel.hasMany(Vehicle);
 
 // Travel.belongsToMany(User);
 User.hasMany(Travel);

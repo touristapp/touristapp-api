@@ -1,16 +1,16 @@
 import { Router } from 'express';
-import users from './user';
-import vehicules  from './vehicule';
+import user from './user';
+import vehicle  from './vehicle';
 import fuel from './fuel';
 import travel from './travel';
 import option from './option';
 
 const api = Router();
 
-api.get("/users", users);
-api.get("/vehicules", vehicules);
-api.get("/fuel", fuel);
-api.get("/travel", travel);
-api.get("/option", option);
+api.use("/user", user);
+api.use("/vehicle", vehicle);
+api.use("/fuel", fuel);
+api.use("/travel", travel);
+api.use("/option", option);
 
 export default api;
