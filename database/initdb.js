@@ -5,9 +5,12 @@ import Travel from './models/travel';
 import Option from './models/Option';
 import Vehicule from './models/Vehicule';
 import Fuel from './models/Fuel';
+require('dotenv').config();
 
+const config = fs.existsSync(__dirname.replace('database','config')+'/config.json') ? require('../config/config.json').dev : null;
+console.log('=================');
+console.log(process.env.URI);
 
-const config = fs.existsSync(__dirname.replace('\\','/')+'/config.json') ? require('./config.json').dev : null;
 export const db = (config) ? new Sequelize(
     config.database,
     config.user,
@@ -24,7 +27,7 @@ export const db = (config) ? new Sequelize(
 db.authenticate()
     .then( (err)=> {console.log('Connection has been establihed successfully.');
 }) 
-    .catch( (err) => { console.log('Connection to the database has failed.');
+    .catch( (err) => { console.log('Connection to the database has failed. \n', err);
 });
 
 User.init(db);
@@ -39,7 +42,7 @@ Vehicule.hasMany(User);
 Vehicule.belongsTo(Fuel);
 Fuel.hasMany(Vehicule);
 
-Travel.belongsToMany(User);
+// Travel.belongsToMany(User);
 User.hasMany(Travel);
 
 Option.belongsToMany(Travel, {as: 'optionToTravel', through: 'Travel_Option', foreignKey: 'id_option'});

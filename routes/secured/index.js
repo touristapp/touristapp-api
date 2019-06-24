@@ -12,3 +12,5 @@ api.get("/vehicules", vehicules);
 api.get("/fuel", fuel);
 api.get("/travel", travel);
 api.get("/option", option);
+
+export default api;
