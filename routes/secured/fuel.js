@@ -18,7 +18,7 @@ api.get("/", async (req, res) => {
 		});
 });
 
-// get user by id
+// get fuel by id
 api.get("/:id", async (req, res) => {
 	await Fuel.findByPk(req.params.id)
 		.then(data => {

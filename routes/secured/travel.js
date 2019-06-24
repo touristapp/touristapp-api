@@ -18,7 +18,7 @@ api.get("/", async (req, res) => {
 		});
 });
 
-// get user by id
+// get travel by id
 api.get("/:id", async (req, res) => {
 	await Travel.findByPk(req.params.id)
 		.then(data => {

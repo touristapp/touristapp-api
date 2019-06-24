@@ -19,7 +19,7 @@ api.get("/", async (req, res) => {
 		});
 });
 
-// get user by id
+// get option by id
 api.get("/:id", async (req, res) => {
 	await Option.findByPk(req.params.id)
 		.then(data => {
