@@ -26,15 +26,18 @@ api.post("/register", async (req, res)=>{
 });
 
 api.post("/login", (req, res)=>{
+    console.log("aaaaaaaaaa")
     // res.status(200).json({ auth: { "message": "ok" } });
     passport.authenticate("local", { session: false }, async (err, user) => {
+        console.log("bbbb")
         if (err) {
-          res.status(400).json({
-            error: { message: err }
-          });
-          return res.status(400);
+            res.status(400).json({
+                error: { message: err }
+            });
+        //   console.log("+++++++++++++++")
+        //   return res.status(400);
         }
-
+        console.log("iiiiiiiiiiiii")
         const { id, name, email } = user;
         const payload = { id, name, email };
         const token = jwt.sign(payload, process.env.SUPERSECRET);

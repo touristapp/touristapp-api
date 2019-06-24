@@ -10,15 +10,15 @@ passport.use(
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: process.env.SUPERSECRET
     },
-    async (jwtPayload, next) => {
+    async (jwtPayload, done) => {
       try {
         const user = await User.findOne({ where: { id: jwtPayload.id } });
         if (!user) {
-          return next("User doesn't exist");
+          return done("User doesn't exist");
         }
-        return next(false, user);
+        return done(false, user);
       } catch (err) {
-        return next(err.message);
+        return done(err.message);
       }
     }
   )
@@ -30,18 +30,18 @@ passport.use(
       usernameField: "email",
       passwordField: "password"
     },
-    async (email, password, next) => {
+    async (email, password, done) => {
       const user = await User.findOne({ where: { email } });
 
       if (!user) {
-        return next("Nickname doesn't exist");
+        return done("Email doesn't exist");
       }
 
       if (!(await user.checkPassword(password))) {
-        return next("Password doesn't match");
+        return done("Password doesn't match");
       }
 
-      return next(false, user);
+      return done(false, user);
     }
   )
 );
