@@ -36,4 +36,22 @@ api.get("/:id", async (req, res) => {
 		});
 });
 
+// delete option by id
+api.delete("/:id", async (req, res)=>{
+    Option.destroy({
+        where: { ID: req.params.id}
+    })
+    .then(data => {
+        res.status(200);
+        res.json({
+            data
+        });
+    })
+    .catch(err => {
+        res.status(500);
+        res.json({
+            err: err.message
+        });
+    });
+});
 export default api;

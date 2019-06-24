@@ -34,4 +34,19 @@ api.get("/:id", async (req, res) => {
 			});
 		});
 });
+
+//delete fuel by id
+api.delete("/:id", async (req, res)=>{
+    await Fuel.destroy({where: { ID: req.params.id }
+    })
+    .then(data => {
+        res.status(200);
+        res.json(data.get({ plain: true }));
+    })
+    .catch(err => {
+        res.status(500);
+        res.json({ error: err.message });
+    });
+});
+
 export default api;
