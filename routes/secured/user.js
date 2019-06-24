@@ -4,8 +4,8 @@ import { Router } from "express";
 const api = Router();
 
 console.log('users')
-api.get("/users", async (req, res) => {
-  res.status(200).json({ data: { "message": "ok" } });
+api.get("/", async (req, res) => {
+  res.status(200).json({ users: { "message": "ok" } });
 });
 
 export default api;
