@@ -8,7 +8,7 @@ require('dotenv').config();
 const port = process.env.PORT || 8080 ;
 
 if (process.env.NODE_ENV) {
-  db.sync({ force: false }); // true: drops all tables first
+  db.sync({ force: true }); // true: drops all tables first
 } else {
   throw new Error('CONFIG ERROR : Please specify your NODE_ENV in an env file')
 }

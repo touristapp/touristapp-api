@@ -38,7 +38,7 @@ api.get("/:id", async (req, res) => {
 
 // delete option by id
 api.delete("/:id", async (req, res)=>{
-    Option.destroy({
+    Option.destroy({ 
         where: { ID: req.params.id}
     })
     .then(data => {
