@@ -8,7 +8,7 @@ api.get("/", async (req, res) => {
 	await User.findAll()
 		.then(data => {
 			console.log(data);
-			res.json({
+			res.status(200).json({
 				data
 			});
 		})

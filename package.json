@@ -38,7 +38,7 @@
     "express": "^4.16.4",
     "fs": "0.0.1-security",
     "iconv-lite": "^0.4.24",
-    "jest": "^24.7.1",
+    "jest": "^24.8.0",
     "jsonwebtoken": "^8.5.1",
     "marked": "^0.6.2",
     "nodemon": "^1.19.1",
