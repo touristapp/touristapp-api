@@ -34,7 +34,7 @@ export default class Travel extends Model {
                 defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3)')
               },
         
-              updatedAt: {
+            updatedAt: {
                 type: Sequelize.DATE(3),
                 defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3)')
               }

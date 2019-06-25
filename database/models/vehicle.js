@@ -17,7 +17,7 @@ export default class Vehicle extends Model {
           defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3)')
         }
       }, {
-        tableName: "Vehicle",
+        tableName: "vehicle",
         sequelize: database,
       })
   };
