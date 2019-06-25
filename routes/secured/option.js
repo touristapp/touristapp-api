@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import Option from '../../database/models/Option';
+import Option from '../../database/models/option';
 
 
 const api = Router();
@@ -7,7 +7,6 @@ const api = Router();
 api.get("/", async (req, res) => {
 	await Option.findAll()
 		.then(data => {
-			console.log(data);
 			res.json({
 				data
 			});

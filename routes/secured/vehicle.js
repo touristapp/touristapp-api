@@ -6,7 +6,6 @@ const api = Router();
 api.get("/", async (req, res) => {
 	await Vehicle.findAll()
 		.then(data => {
-			console.log(data);
 			res.json({
 				data
 			});
@@ -28,14 +27,26 @@ api.get("/:id", async (req, res) => {
 			});
 		})
 		.catch(err => {
-            console.log(err);
-            
 			res.status(500);
 			res.json({
 				err: err.message
 			});
 		});
 });
+
+api.post("/", async (req, res) => {
+    const { fuelId, conso} = req.body
+    try {
+        const vehicle = new Vehicle ({
+            fuelId,
+            conso
+        })
+        await vehicle.save()
+        res.status(200).json({ message: "success", data: vehicle })
+    } catch (err) {
+        res.status(400).json({ error: err.message })
+    }
+})
 
 // modify vehicle by id
 api.put("/:id", async (req, res)=>{

@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import Fuel from '../../database/models/Fuel';
+import Fuel from '../../database/models/fuel';
 
 const api = Router();
 
 api.get("/", async (req, res) => {
+	console.log('======== getAllFuel')
 	await Fuel.findAll()
 		.then(data => {
-			console.log(data);
 			res.json({
 				data
 			});
@@ -20,6 +20,7 @@ api.get("/", async (req, res) => {
 
 // get fuel by id
 api.get("/:id", async (req, res) => {
+	console.log('======== getOneFuel')
 	await Fuel.findByPk(req.params.id)
 		.then(data => {
 			res.status(200);

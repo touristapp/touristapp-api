@@ -30,7 +30,7 @@ api.post("/login", (req, res)=>{
             res.status(400).json({
                 error: { message: err }
             });
-        //   return res.status(400);
+            return res.status(400);
         }
         const { id, name, email } = user;
         const payload = { id, name, email };

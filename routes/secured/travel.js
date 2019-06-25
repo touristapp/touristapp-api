@@ -6,7 +6,6 @@ const api = Router();
 api.get("/", async (req, res) => {
 	await Travel.findAll()
 		.then(data => {
-			console.log(data);
 			res.json({
 				data
 			});

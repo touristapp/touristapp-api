@@ -2,14 +2,12 @@ import { Sequelize, Op } from 'sequelize';
 import fs from 'fs';
 import User from './models/user';
 import Travel from './models/travel';
-import Option from './models/Option';
+import Option from './models/option';
 import Vehicle from './models/Vehicle';
-import Fuel from './models/Fuel';
+import Fuel from './models/fuel';
 require('dotenv').config();
 
 const config = fs.existsSync(__dirname.replace('database','config')+'/config.json') ? require('../config/config.json').dev : null;
-console.log('=================');
-console.log(process.env.URI);
 
 // export const db = (config) ? new Sequelize(
 //     config.database,

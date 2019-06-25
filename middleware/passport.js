@@ -7,7 +7,7 @@ require('dotenv').config();
 passport.use(
   new LocalStrategy(
     {
-      emailField: "email",
+      usernameField: "email",
       passwordField: "password"
     },
     async (email, password, next) => {
