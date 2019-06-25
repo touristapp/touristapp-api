@@ -39,7 +39,9 @@ Fuel.init(db);
 Option.init(db);
 
 User.belongsTo(Vehicle);
-Vehicle.hasMany(User);
+Vehicle.hasMany(User, {
+    allowNull: true
+});
 
 Vehicle.belongsTo(Fuel);
 Fuel.hasMany(Vehicle);

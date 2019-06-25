@@ -14,7 +14,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 
 app.get("/", (request, response) => {
-  console.log('ij')
   const file = fs.readFileSync("./README.md", 'utf8');
   response.send(marked(file.toString()));
 });
