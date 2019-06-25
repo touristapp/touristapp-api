@@ -17,7 +17,7 @@ export default class Option extends Model {
           defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3)')
         }
       }, {
-        tableName: "Option",
+        tableName: "option",
         sequelize: database,
       })
   };

@@ -39,18 +39,16 @@ Fuel.init(db);
 Option.init(db);
 
 User.belongsTo(Vehicle);
-Vehicle.hasMany(User, {
-    allowNull: true
-});
-
-
+Vehicle.hasMany(User);
 
 Vehicle.belongsTo(Fuel);
 Fuel.hasMany(Vehicle);
 
 Travel.belongsTo(User);
-// Travel.belongsToMany(User);
 User.hasMany(Travel);
+
+Travel.belongsTo(Vehicle);
+Vehicle.hasMany(Travel);
 
 Option.belongsToMany(Travel, {as: 'optionToTravel', through: 'Travel_Option', foreignKey: 'id_option'});
 Travel.belongsToMany(Option, {as: 'travelToOption', through: 'Travel_Option', foreignKey: 'id_travel'});

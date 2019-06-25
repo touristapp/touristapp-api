@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import Fuel from '../../database/models/fuel';
+import Fuel from '../../database/models/Fuel';
 
 const api = Router();
 

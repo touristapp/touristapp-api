@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import Vehicle from '../../database/models/vehicle';
+import Vehicle from '../../database/models/Vehicle';
 
 const api = Router();
 
