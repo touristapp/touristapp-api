@@ -16,6 +16,11 @@ api.get("/", (req, res) => {
 });
 
 api.use("/auth", auth)
+<<<<<<< HEAD
 api.use("/", passport.authenticate("jwt", { session: false }), secured);
+=======
+api.use("/", secured);
+// api.use("/", passport.authenticate("jwt", { session: false }), secured);
+>>>>>>> feat (tests) simple base
 
 export default api;
