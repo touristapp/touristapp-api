@@ -1,12 +1,15 @@
 import Sequelize, { Model } from "sequelize";
 
-export default class Option extends Model {
+export default class Fuel extends Model {
   static init(database) {
 
     return super.init(
       {
         name: {
           type: Sequelize.STRING,
+        },
+        carbonFootprint: {
+          type: Sequelize.FLOAT(10, 2),
         },
         createdAt: {
           type: Sequelize.DATE(3),
@@ -17,7 +20,7 @@ export default class Option extends Model {
           defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3)')
         }
       }, {
-        tableName: "Option",
+        tableName: "fuel",
         sequelize: database,
       })
   };

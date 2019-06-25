@@ -40,8 +40,8 @@ URI = db_url
 
 | method       | endpoint                       | body                                                       |  auth | done |
 |--------------|--------------------------------|------------------------------------------------------------|-------|------|
-| **POST**     | `/api/auth/register `          | { name, email, password, password_confirmation, picture }  | none  | no   |
-| **POST**     | `/api/auth/login`              | { email, password }                                        | none  | no   |
+| **POST**     | `/api/auth/register `          | { name, email, password, password_confirmation, picture }  | none  | yes   |
+| **POST**     | `/api/auth/login`              | { email, password }                                        | none  | yes   |
 
 ---
 
@@ -49,7 +49,7 @@ URI = db_url
 
 | method       | endpoint                       | body                                                      |  auth | done |
 |--------------|--------------------------------|-----------------------------------------------------------|-------|------|
-| **GET**      | `/api/user/:id`                |                                                           | token | no   |
+| **GET**      | `/api/user/:id`                |                                                           | token | done   |
 | **PUT**      | `/api/user/update/:id`         | { name, email, picture }                                  | token | no   |
 | **PUT**      | `/api/user/updatepassword/:id` | { old\_password, password, password\_confirmation }       | token | no   |
 | **PUT**      | `/api/user/recreatepassword`   | { email }                                                 | none  | no   |
@@ -61,11 +61,11 @@ URI = db_url
 
 | method       | endpoint                       | body                                                      |  auth | done |
 |--------------|--------------------------------|-----------------------------------------------------------|-------|------|
-| **GET**      | `/api/travel/`                 | { id_user, done }                                         | token | no   |
+| **GET**      | `/api/travel/`                 | { UserId, done }                                          | token | no   |
 | **GET**      | `/api/travel/:id`              |                                                           | token | no   |
-| **POST**     | `/api/travel/`                 | { id_user, departure, destination, carbonFootprint, distance, duration, id_vehicle } | token | no   |
-| **PUT**      | `/api/travel/:id`              | { id_user, departure, destination, carbonFootprint, distance, duration, id_vehicle } | token | no   |
-| **DELETE**   | `/api/travel/`                 | { id_user, done }                                         | token | no   |
+| **POST**     | `/api/travel/`                 | { UserId, departure, destination, carbonFootprint, distance, duration, id_vehicle } | token | no   |
+| **PUT**      | `/api/travel/:id`              | { UserId, departure, destination, carbonFootprint, distance, duration, id_vehicle } | token | no   |
+| **DELETE**   | `/api/travel/`                 | { UserId, done }                                          | token | no   |
 | **DELETE**   | `/api/travel/:id`              |                                                           | token | no   |
 
 ---
@@ -74,9 +74,9 @@ URI = db_url
 
 | method       | endpoint                       | body                                                      |  auth | done |
 |--------------|--------------------------------|-----------------------------------------------------------|-------|------|
-| **GET**      | `/api/vehicle/:id`             |                                                           | token | no   |
-| **POST**     | `/api/vehicle/`                | { id_fuel, conso }                                        | token | no   |
-| **PUT**      | `/api/vehicle/:id`             | { id_fuel, conso }                                        | token | no   |
+| **GET**      | `/api/vehicle/:id`             |                                                           | token | yes   |
+| **POST**     | `/api/vehicle/`                | { FuelId, conso }                                         | token | yes   |
+| **PUT**      | `/api/vehicle/:id`             | { FuelId, conso }                                         | token | yes   |
 | **DELETE**   | `/api/vehicle/:id`             |                                                           | token | no   |
 
 ---
@@ -85,9 +85,10 @@ URI = db_url
 
 | method       | endpoint                       | body                                                      |  auth | done |
 |--------------|--------------------------------|-----------------------------------------------------------|-------|------|
-| **GET**      | `/api/fuel/`                   |                                                           | token | no   |
-| **POST**     | `/api/fuel/`                   | { name, carbonFootprint }                                 | token | no   |
-| **DELETE**   | `/api/fuel/:id`                |                                                           | token | no   |
+| **GET**      | `/api/fuel/`                   |                                                           | token | yes   |
+| **GET**      | `/api/fuel/:id`                |                                                           | token | yes   |
+| **POST**     | `/api/fuel/`                   | { name, carbonFootprint }                                 | token | yes   |
+| **DELETE**   | `/api/fuel/:id`                |                                                           | token | yes   |
 
 ---
 
@@ -105,7 +106,7 @@ URI = db_url
 
 | method       | endpoint                       | body                                                      |  auth | done |
 |--------------|--------------------------------|-----------------------------------------------------------|-------|------|
-| **GET**      | `/api/admin/users/`            |                                                           | token | no   |
+| **GET**      | `/api/admin/users/             |                                                           | token | no   |
 | **GET**      | `/api/admin/user/`             | { email }                                                 | token | no   |
 | **PUT**      | `/api/admin/user/update/:id`   | { name, email, picture }                                  | token | no   |
 | **DELETE**   | `/api/admin/user/delete/:id`   |                                                           | token | no   |
