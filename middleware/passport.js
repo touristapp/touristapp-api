@@ -5,43 +5,42 @@ import User from "../database/models/user";
 require('dotenv').config();
 
 passport.use(
-  new JwtStrategy(
+  new LocalStrategy(
     {
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: process.env.SUPERSECRET
+      emailField: "email",
+      passwordField: "password"
     },
-    async (jwtPayload, done) => {
-      try {
-        const user = await User.findOne({ where: { id: jwtPayload.id } });
-        if (!user) {
-          return done("User doesn't exist");
-        }
-        return done(false, user);
-      } catch (err) {
-        return done(err.message);
+    async (email, password, next) => {
+      const user = await User.findOne({ where: { email } });
+
+      if (!user) {
+        return next("Email doesn't exist");
       }
+
+      if (!(await user.checkPassword(password))) {
+        return next("Password doesn't match");
+      }
+      return next(false, user);
     }
   )
 );
 
 passport.use(
-  new LocalStrategy(
+  new JwtStrategy(
     {
-      usernameField: "email",
-      passwordField: "password"
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKey: process.env.SUPERSECRET
     },
-    async (email, password, done) => {
-      const user = await User.findOne({ where: { email } });
-
-      if (!user) {
-        return done("Email doesn't exist");
+    async (jwtPayload, next) => {
+      try {
+        const user = await User.findOne({ where: { id: jwtPayload.id } });
+        if (!user) {
+          return next("User doesn't exist");
+        }
+        return next(false, user);
+      } catch (err) {
+        return next(err.message);
       }
-
-      if (!(await user.checkPassword(password))) {
-        return done("Password doesn't match");
-      }
-
-      return done(false, user);
     }
   )
 );
