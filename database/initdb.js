@@ -3,7 +3,7 @@ import fs from 'fs';
 import User from './models/user';
 import Travel from './models/travel';
 import Option from './models/option';
-import Vehicle from './models/Vehicle';
+import Vehicle from './models/vehicle';
 import Fuel from './models/fuel';
 require('dotenv').config();
 

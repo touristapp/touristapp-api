@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import Vehicle from '../../database/models/Vehicle';
+import Vehicle from '../../database/models/vehicle';
 
 const api = Router();
 
@@ -37,7 +37,7 @@ api.get("/:id", async (req, res) => {
 
 // post vehicle CHECKED
 api.post("/", async (req, res) => {
-    const { FuelId, conso} = req.body
+    const { FuelId, conso } = req.body
     try {
         const vehicle = new Vehicle ({
             FuelId,
