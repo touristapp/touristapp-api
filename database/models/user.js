@@ -58,10 +58,12 @@ export default class User extends Model {
 
       state: {
         type: Sequelize.STRING,
+        defaultValue: "active",
       },
 
       role: {
         type: Sequelize.STRING,
+        defaultValue: "user",
       },
 
       createdAt: {

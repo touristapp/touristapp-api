@@ -39,20 +39,35 @@ api.put("/:id", async (req, res) => {
 	}
 
 	await User.update({ 
-		name, 
-		email, 
-		picture,
-		VehicleId: vehicle.id
-	}, {
-		where: { id: req.param.id }, 
-		returning: true, plain: true
-	})
-	.then((data) => {
-		res.status(200).json({ message: "success", data: { data }});
-	})
-	.catch((err) => {
-		res.status(500).json({ message: "error", error: { err }});
-	})
+			name, 
+			email, 
+			picture,
+			VehicleId: vehicle.id
+		}, {
+			where: { id: req.param.id }, 
+			returning: true, plain: true
+		})
+		.then((data) => {
+			res.status(200).json({ message: "success", data: { data }});
+		})
+		.catch((err) => {
+			res.status(500).json({ message: "error", error: { err }});
+		})
+})
+
+api.delete("/:id", async (req, res) => {
+	await User.update({
+			state: "inactive"
+		}, {
+			where: { id: req.params.id },
+			returning: true, plain: true
+		})
+		.then((data) => {
+			res.status(200).json({ message: "succes", data: { data }});
+		})
+		.catch((err) => {
+			res.status(500).json({ message: "error", error: { err }});
+		})
 })
 
 export default api;

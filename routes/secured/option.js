@@ -35,6 +35,19 @@ api.get("/:id", async (req, res) => {
 		});
 });
 
+api.post("/", async (req, res) => {
+	const { name } = req.body;
+	try {
+		const option = new Option({
+			name
+		});
+		option.save()
+		res.status(201).json({ message: "success", data: { data } });
+	} catch (err) {
+		res.status(500).json({ message: "error", error: err.message });
+	}
+})
+
 // delete option by id
 api.delete("/:id", async (req, res)=>{
     Option.destroy({ 

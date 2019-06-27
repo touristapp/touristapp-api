@@ -34,24 +34,46 @@ api.get("/:id", async (req, res) => {
 		});
 });
 
+api.post("/", async (req, res) => {
+    const { deparature, destination, carbonFootprint, distance, duration, VehicleId, UserId } = req.body;
+    try {
+        const travel = new Travel ({
+            deparature, 
+            destination, 
+            carbonFootprint, 
+            distance, 
+            duration, 
+            VehicleId, 
+            UserId
+        });
+        travel.save();
+        res.status(201).json({ message: "success", data: { data } });
+
+    } catch (err) {
+        res.status(500).json({ message: "error", error: err.message});
+    }
+})
+
 //modify travel by id
 api.put("/:id", async (req, res)=>{
+    const { deparature, destination, carbonFootprint, distance, duration, VehicleId } = req.body;
     await Travel.update({
-        deparature: req.body.deparature,
-        destination: req.body.destination,
-        carbonFootprint: req.body.carbonFootprint,
-        distance: req.body.distance,
-        duration: req.body.duration,
+        deparature,
+        destination,
+        carbonFootprint,
+        distance,
+        duration,
+        VehicleId,
         updatedAt: updatedAt
-    }, {where: {ID: req.body.id}, returning: true, plain: true})
-    
+    }, {
+        where: {ID: req.params.id}, 
+        returning: true, plain: true
+    })
     .then(function(data) {
-        res.status(200);
-        res.json(data.get({ plain: true }));
+        res.status(200).json({ message: "success", data: data[1] });
     })
     .catch(function(error) {
-        res.status(500);
-        res.json({ error: error.message });
+        res.status(500).json({ message: "error",  error: error.message });
     });
 });
 
