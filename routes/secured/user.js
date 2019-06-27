@@ -1,6 +1,7 @@
 import { Router } from "express"; 
 import User from "../../database/models/user";
 import Vehicle from "../../database/models/vehicle";
+import jwt from 'jsonwebtoken';
 
 const api = Router();
 
@@ -22,37 +23,50 @@ api.get("/:id", async (req, res) => {
 });
 
 api.put("/:id", async (req, res) => {
-	const { name, email, picture, FuelId, conso } = req.body;
+	console.log(req.headers.authorization)
+	let bearerHeader =  req.headers.authorization
+	bearerHeader.replace('Bearer ','');
+	console.log(bearerHeader)
+	jwt.verify(bearerHeader, process.env.SUPERSECRET, async (err,decoded) => {
+		if (err) {
+			console.log(decoded)
+			res.status(501).json({ message: "error", error: { err} });
+		} else {
+			const { name, email, picture, FuelId, conso } = req.body;
+			let vehicle = await Vehicle.findOne({ where: { FuelId, conso }});
 
-	let vehicle = await Vehicle.findOne({ where: { FuelId, conso }});
-	console.log("________________________________ vehicle");
-	console.log(vehicle);
-	if (!vehicle) {
-		const newvehicle = new Vehicle ({
-			FuelId, 
-			conso
-		})
-		console.log('================================ newvehicle');
-		console.log(newvehicle);
-		await newvehicle.save();
-		vehicle = newvehicle;
-	}
+			if (!vehicle) {
+				try {
+					const newvehicle = new Vehicle ({
+						FuelId, 
+						conso
+					})
+					await newvehicle.save();
+					vehicle = newvehicle;
+				} catch (error) {
+					res.status(502).json({ message: "error", error: { err } });
+				}
+			}
 
-	await User.update({ 
-			name, 
-			email, 
-			picture,
-			VehicleId: vehicle.id
-		}, {
-			where: { id: req.param.id }, 
-			returning: true, plain: true
-		})
-		.then((data) => {
-			res.status(200).json({ message: "success", data: { data }});
-		})
-		.catch((err) => {
-			res.status(500).json({ message: "error", error: { err }});
-		})
+			await User.update({ 
+					name, 
+					email, 
+					picture,
+					password: "fake_password",
+					password_confirmation: "fake_password",
+					VehicleId: vehicle.id
+				}, {
+					where: { id: req.param.id }, 
+					returning: true, plain: true
+				})
+				.then((data) => {
+					res.status(200).json({ message: "success", data: { data }});
+				})
+				.catch((err) => {
+					res.status(503).json({ message: "error", error: { err }});
+				})
+		}
+	});
 })
 
 api.delete("/:id", async (req, res) => {

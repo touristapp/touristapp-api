@@ -19,19 +19,6 @@ api.get("/", async (req, res) => {
 		});
 });
 
-// ad a fuel type --> CHECKED
-api.post("/", async(req, res) => {
-	const { name, carbonFootprint } = req.body;
-	try {
-		const newFuel = await new Fuel({ name, carbonFootprint })
-		await newFuel.save();
-		res.status(201).json({ data: { newFuel }});
-	}
-	catch(err){
-		res.status(500).json({ err: err.message });
-	}
-})
-
 // get fuel by id --> CHECKED
 api.get("/:id", async (req, res) => {
 	await Fuel.findByPk(req.params.id)
@@ -48,6 +35,20 @@ api.get("/:id", async (req, res) => {
 			});
 		});
 });
+
+// ad a fuel type --> CHECKED
+api.post("/", async(req, res) => {
+	const { name, carbonFootprint } = req.body;
+	try {
+		const newFuel = await new Fuel({ name, carbonFootprint })
+		await newFuel.save();
+		res.status(201).json({ data: { newFuel }});
+	}
+	catch(err){
+		res.status(500).json({ err: err.message });
+	}
+})
+
 
 //delete fuel by id --> CHECKED
 api.delete("/:id", async (req, res)=>{
