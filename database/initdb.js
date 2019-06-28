@@ -26,7 +26,7 @@ export const db = new Sequelize(process.env.URI);
 
 db.authenticate()
     .then( (err)=> {console.log('Connection has been establihed successfully.');
-}) 
+})
     .catch( (err) => { console.log('Connection to the database has failed. \n', err);
 });
 
@@ -50,6 +50,5 @@ User.hasMany(Travel);
 Travel.belongsTo(Vehicle);
 Vehicle.hasMany(Travel);
 
-Option.belongsToMany(Travel, {as: 'optionToTravel', through: 'Travel_Option', foreignKey: 'id_option'});
-Travel.belongsToMany(Option, {as: 'travelToOption', through: 'Travel_Option', foreignKey: 'id_travel'});
-
+Option.belongsToMany(Travel, {as: 'optionToTravel', through: 'travel_option', foreignKey: 'id_option'});
+Travel.belongsToMany(Option, {as: 'travelToOption', through: 'travel_option', foreignKey: 'id_travel'});

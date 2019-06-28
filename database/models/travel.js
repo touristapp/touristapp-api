@@ -5,7 +5,7 @@ export default class Travel extends Model {
 
         return super.init({
 
-            deparature: {
+            departure: {
                 type: Sequelize.STRING,
             },
 
@@ -16,7 +16,7 @@ export default class Travel extends Model {
             carbonFootprint: {
                 type: Sequelize.FLOAT(10, 2)
             },
-            
+
             distance: {
                 type: Sequelize.INTEGER,
             },
@@ -33,7 +33,7 @@ export default class Travel extends Model {
                 type: Sequelize.DATE(3),
                 defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3)')
               },
-        
+
             updatedAt: {
                 type: Sequelize.DATE(3),
                 defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3)')
