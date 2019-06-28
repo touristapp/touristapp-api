@@ -1,0 +1,9 @@
+{
+  "dev": {
+    "dialect": "postgres",
+    "database": "deq9fc8jo5mq7",
+    "port": 5432,
+    "user": "enlgqjwmxszxza",
+    "password": "938d9556cf8346dc628d3b24fc4ba16aa26764b1e0cb6e80b57cf5a4935b693b"
+  }
+}
