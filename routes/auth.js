@@ -39,4 +39,14 @@ api.post("/login", (req, res)=>{
     })(req, res);
 });
 
+api.post("/authorize", (req, res)=> {
+  jwt.verify(req.body.token, process.env.SUPERSECRET, async (err,decoded) => {
+    if (err) {
+			res.status(501).json({ message: "error", error: { err } });
+		} else {
+      res.status(200).json({ message: "success", data: { decoded }});
+    }
+  });
+})
+
 export default api;
