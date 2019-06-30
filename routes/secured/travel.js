@@ -58,12 +58,12 @@ api.post("/", async (req, res) => {
 api.put("/:id", async (req, res)=>{
     const { deparature, destination, carbonFootprint, distance, duration, VehicleId } = req.body;
     await Travel.update({
-        deparature,
-        destination,
-        carbonFootprint,
-        distance,
-        duration,
-        VehicleId,
+        deparature: req.body.deparature,
+        destination: req.body.destination,
+        carbonFootprint: req.body.carbonFootprint,
+        distance: req.body.distance,
+        duration: req.body.duration,
+        VehicleId: req.body.VehicleId,
         updatedAt: updatedAt
     }, {
         where: {ID: req.params.id}, 

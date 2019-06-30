@@ -49,11 +49,11 @@ api.put("/:id", async (req, res) => {
 			}
 
 			await User.update({ 
-					name, 
-					email, 
-					picture,
-					password: "fake_password",
-					password_confirmation: "fake_password",
+					name: req.body.name, 
+					email: req.body.email, 
+					picture: req.body.picture,
+					password: req.body.password,
+					password_confirmation: req.body.password_confirmation,
 					VehicleId: vehicle.id
 				}, {
 					where: { id: req.param.id }, 

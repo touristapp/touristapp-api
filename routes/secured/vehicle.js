@@ -54,8 +54,8 @@ api.post("/", async (req, res) => {
 api.put("/:id", async (req, res)=>{
     const { FuelId, conso } = req.body
     await Vehicle.update({
-            conso,
-            FuelId
+            conso: req.body.conso,
+            FuelId: req.body.FuelId
         }, { 
             where: { id: req.params.id }, 
             returning: true, plain: true 
