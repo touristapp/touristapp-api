@@ -40,8 +40,8 @@ URI = db_url
 
 | method       | endpoint                       | body                                                       |  auth | done |
 |--------------|--------------------------------|------------------------------------------------------------|-------|------|
-| **POST**     | `/api/auth/register `          | { name, email, password, password_confirmation, picture }  | none  | yes   |
-| **POST**     | `/api/auth/login`              | { email, password }                                        | none  | yes   |
+| **POST**     | `/api/auth/register `          | { name, email, password, password_confirmation, picture }  | none  | yes  |
+| **POST**     | `/api/auth/login`              | { email, password }                                        | none  | yes  |
 
 ---
 
@@ -49,11 +49,13 @@ URI = db_url
 
 | method       | endpoint                       | body                                                      |  auth | done |
 |--------------|--------------------------------|-----------------------------------------------------------|-------|------|
-| **GET**      | `/api/user/:id`                |                                                           | token | done   |
-| **PUT**      | `/api/user/update/:id`         | { name, email, picture }                                  | token | no   |
-| **PUT**      | `/api/user/updatepassword/:id` | { old\_password, password, password\_confirmation }       | token | no   |
+| **GET**      | `/api/user/:id`                |                                                           | token | yes  |
+| **GET**      | `/api/user/vehicle/:id`        |                                                           | token | yes  |
+| **PUT**      | `/api/user/:id`                | { name, email }                                           | token | yes  |
+| **PUT**      | `/api/user/vehicle/:id`        | { conso, FuelId }                                         | token | yes  |
+| **PUT**      | `/api/user/updatepassword/:id` | { old\_password, password, password\_confirmation }       | token | yes  |
 | **PUT**      | `/api/user/recreatepassword`   | { email }                                                 | none  | no   |
-| **DELETE**   | `/api/user/delete/:id`         |                                                           | token | no   |
+| **DELETE**   | `/api/user/:id`                |                                                           | token | yes  |
 
 ---
 
@@ -74,9 +76,9 @@ URI = db_url
 
 | method       | endpoint                       | body                                                      |  auth | done |
 |--------------|--------------------------------|-----------------------------------------------------------|-------|------|
-| **GET**      | `/api/vehicle/:id`             |                                                           | token | yes   |
-| **POST**     | `/api/vehicle/`                | { FuelId, conso }                                         | token | yes   |
-| **PUT**      | `/api/vehicle/:id`             | { FuelId, conso }                                         | token | yes   |
+| **GET**      | `/api/vehicle/:id`             |                                                           | token | yes  |
+| **POST**     | `/api/vehicle/`                | { FuelId, conso }                                         | token | yes  |
+| **PUT**      | `/api/vehicle/:id`             | { FuelId, conso }                                         | token | yes  |
 | **DELETE**   | `/api/vehicle/:id`             |                                                           | token | no   |
 
 ---
@@ -106,7 +108,7 @@ URI = db_url
 
 | method       | endpoint                       | body                                                      |  auth | done |
 |--------------|--------------------------------|-----------------------------------------------------------|-------|------|
-| **GET**      | `/api/admin/users/             |                                                           | token | no   |
+| **GET**      | `/api/admin/users/`            |                                                           | token | yes  |
 | **GET**      | `/api/admin/user/`             | { email }                                                 | token | no   |
 | **PUT**      | `/api/admin/user/update/:id`   | { name, email, picture }                                  | token | no   |
 | **DELETE**   | `/api/admin/user/delete/:id`   |                                                           | token | no   |
