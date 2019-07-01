@@ -5,7 +5,7 @@ import fuel from './fuel';
 import travel from './travel';
 import option from './option';
 import admin from './admin';
-import imageUpload from  "./imageUpload"
+import image from  "./image"
 
 const api = Router();
 
@@ -15,6 +15,6 @@ api.use("/fuel", fuel);
 api.use("/travel", travel);
 api.use("/option", option);
 api.use("/admin", admin);
-api.use("/imageUpload", imageUpload)
+api.use("/image", image)
 
 export default api;

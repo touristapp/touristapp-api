@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-const upload = require('../../services/imageUpload');
+const { upload, deleteImg } = require('../../services/handleS3');
 
 const singleUpload = upload.single('image');
 
@@ -15,5 +15,15 @@ api.post('/', (req, res) => {
     return res.json({'imageUrl': req.file.location});
   });
 });
+
+api.delete('/delete/:fileKey', (req, res) => {
+  try {
+    deleteImg(req.params.fileKey);
+    return res.status(200).json({message: "Success - Image deleted from S3 or not existing"})
+  }
+  catch (err) {
+    return res.status(500).json({ message: "error", error: err.stack});
+  }
+})
 
 export default api;
