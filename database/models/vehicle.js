@@ -5,6 +5,9 @@ export default class Vehicle extends Model {
 
     return super.init(
       {
+        name: {
+          type: Sequelize.STRING,
+        },
         conso: {
           type: Sequelize.NUMERIC,
         },
