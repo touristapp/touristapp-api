@@ -22,20 +22,28 @@ api.get("/:id", async (req, res) => {
 		});
 });
 
+api.get("/vehicle/:id", async (req, res) => {
+	try {
+		const user = await User.findByPk(req.params.id)
+		const vehicle = await Vehicle.findByPk(user.VehicleId)
+
+		res.status(200).json({ message: "success", data: vehicle })
+	} catch (err) {
+		res.status(501).json({ message: "error", error: { err } })
+	}
+});
+
 api.put("/:id", async (req, res) => {
 	let bearerHeader = req.headers.authorization.replace('Bearer ','')
 	jwt.verify(bearerHeader, process.env.SUPERSECRET, async (err,decoded) => {
 		if (err) {
 			res.status(501).json({ message: "error", error: { err} });
 		} else {
-			const { name, email, picture } = req.body;
-
-			console.log(req.params.id)
+			const { name, email } = req.body;
 
 			await User.update({ 
 					name,
-					email, 
-					picture,
+					email,
 					password: "fake_password",
 					password_confirmation: "fake_password",
 				}, {
@@ -99,7 +107,7 @@ api.put("/vehicle/:id", async (req, res) => {
 	});
 })
 
-api.put("/password/:id", async (req, res) => {
+api.put("/updatepassword/:id", async (req, res) => {
 	let bearerHeader = req.headers.authorization.replace('Bearer ','')
 	jwt.verify(bearerHeader, process.env.SUPERSECRET, async (err,decoded) => {
 		if (err) {
