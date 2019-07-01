@@ -38,45 +38,10 @@ const upload = multer({
 });
 
 const deleteImg = async (imgKey) => {
-  await s3
-  .headObject({
-    Bucket: process.env.AWS_S3_BUCKET,
-    Key: imgKey
-  })
-  .promise()
-  .then(
-    () =>     s3.deleteObject({
-      Bucket: process.env.AWS_S3_BUCKET,
-      Key: imgKey
-  },function (err,data){}),
-    err => {
-      if (err.code === 'NotFound') {
-        return false;
-      }
-      throw err;
-    }
-  )
     s3.deleteObject({
         Bucket: process.env.AWS_S3_BUCKET,
         Key: imgKey
     },function (err,data){})
 }
-
-
-// const exists = await s3
-//   .headObject({
-//     Bucket: S3_BUCKET_NAME,
-//     Key: s3Key,
-//   })
-//   .promise()
-//   .then(
-//     () => true,
-//     err => {
-//       if (err.code === 'NotFound') {
-//         return false;
-//       }
-//       throw err;
-//     }
-//   );
 
 module.exports = { upload, deleteImg };
