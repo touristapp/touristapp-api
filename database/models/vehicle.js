@@ -5,8 +5,11 @@ export default class Vehicle extends Model {
 
     return super.init(
       {
+        name: {
+          type: Sequelize.STRING,
+        },
         conso: {
-          type: Sequelize.FLOAT(10, 2),
+          type: Sequelize.NUMERIC,
         },
         createdAt: {
           type: Sequelize.DATE(3),

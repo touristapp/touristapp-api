@@ -9,7 +9,7 @@ export default class Fuel extends Model {
           type: Sequelize.STRING,
         },
         carbonFootprint: {
-          type: Sequelize.FLOAT(10, 2),
+          type: Sequelize.NUMERIC,
         },
         createdAt: {
           type: Sequelize.DATE(3),

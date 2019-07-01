@@ -14,7 +14,7 @@ export default class Travel extends Model {
             },
 
             carbonFootprint: {
-                type: Sequelize.FLOAT(10, 2)
+                type: Sequelize.NUMERIC
             },
 
             distance: {
