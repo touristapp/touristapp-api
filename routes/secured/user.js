@@ -55,6 +55,50 @@ api.put("/:id", async (req, res) => {
 	});
 })
 
+api.put("/vehicle/:id", async (req, res) => {
+	let bearerHeader = req.headers.authorization.replace('Bearer ','')
+	jwt.verify(bearerHeader, process.env.SUPERSECRET, async (err,decoded) => {
+		if (err) {
+			res.status(501).json({ message: "error", error: { err} });
+		} else {
+			const { conso, FuelId } = req.body;
+
+			let vehicle = await Vehicle.findOne({ where: { FuelId, conso }});
+
+			if (!vehicle) {
+				try {
+					const newvehicle = new Vehicle ({
+						FuelId, 
+						conso
+					})
+					await newvehicle.save();
+					vehicle = newvehicle;
+				} catch (error) {
+					res.status(502).json({ message: "error", error: { err } });
+				}
+			}
+
+			await User.update({ 
+					VehicleId: vehicle.id,
+					password: "fake_password",
+					password_confirmation: "fake_password",
+				}, {
+					where: { id: req.params.id }, 
+					returning: true, plain: true
+				})
+				.then((data) => {
+					const payload = { id: data.id, name: data.name, email: data.email };
+					const token = jwt.sign(payload, process.env.SUPERSECRET);
+					res.status(200).json({ message: "success", data: data[1] , meta: token});
+				})
+				.catch((err) => {
+					console.log(err)
+					res.status(503).json({ message: "error", error: { err }});
+				})
+		}
+	});
+})
+
 api.delete("/:id", async (req, res) => {
 	await User.update({
 			state: "inactive"
