@@ -23,46 +23,32 @@ api.get("/:id", async (req, res) => {
 });
 
 api.put("/:id", async (req, res) => {
-	console.log(req.headers.authorization)
-	let bearerHeader =  req.headers.authorization
-	bearerHeader.replace('Bearer ','');
-	console.log(bearerHeader)
+	let bearerHeader = req.headers.authorization.replace('Bearer ','')
 	jwt.verify(bearerHeader, process.env.SUPERSECRET, async (err,decoded) => {
 		if (err) {
-			console.log(decoded)
 			res.status(501).json({ message: "error", error: { err} });
 		} else {
-			const { name, email, picture, FuelId, conso } = req.body;
-			let vehicle = await Vehicle.findOne({ where: { FuelId, conso }});
+			const { name, email, picture } = req.body;
 
-			if (!vehicle) {
-				try {
-					const newvehicle = new Vehicle ({
-						FuelId, 
-						conso
-					})
-					await newvehicle.save();
-					vehicle = newvehicle;
-				} catch (error) {
-					res.status(502).json({ message: "error", error: { err } });
-				}
-			}
+			console.log(req.params.id)
 
 			await User.update({ 
-					name: req.body.name, 
-					email: req.body.email, 
-					picture: req.body.picture,
-					password: req.body.password,
-					password_confirmation: req.body.password_confirmation,
-					VehicleId: vehicle.id
+					name,
+					email, 
+					picture,
+					password: "fake_password",
+					password_confirmation: "fake_password",
 				}, {
-					where: { id: req.param.id }, 
+					where: { id: req.params.id }, 
 					returning: true, plain: true
 				})
 				.then((data) => {
-					res.status(200).json({ message: "success", data: { data }});
+					const payload = { id: data.id, name: data.name, email: data.email };
+					const token = jwt.sign(payload, process.env.SUPERSECRET);
+					res.status(200).json({ message: "success", data: data[1] , meta: token});
 				})
 				.catch((err) => {
+					console.log(err)
 					res.status(503).json({ message: "error", error: { err }});
 				})
 		}
