@@ -99,6 +99,35 @@ api.put("/vehicle/:id", async (req, res) => {
 	});
 })
 
+api.put("/password/:id", async (req, res) => {
+	let bearerHeader = req.headers.authorization.replace('Bearer ','')
+	jwt.verify(bearerHeader, process.env.SUPERSECRET, async (err,decoded) => {
+		if (err) {
+			res.status(501).json({ message: "error", error: { err} });
+		} else {
+			const { password, password_confirmation, current_password } = req.body;
+			const old_user = await User.findByPk(req.params.id);
+			if ((await old_user.checkPassword(current_password))) {
+				await old_user.update({ 
+						password,
+						password_confirmation,
+					}, {
+						returning: true, plain: true
+					})
+					.then((data) => {
+						res.status(200).json({ message: "success", data: data[1]});
+					})
+					.catch((err) => {
+						console.log(err)
+						res.status(503).json({ message: "error", error: { err }});
+					})
+			} else {
+				res.status(400).json({ message: "error", error: "Old password is incorrect." })
+			}
+		}
+	});
+})
+
 api.delete("/:id", async (req, res) => {
 	await User.update({
 			state: "inactive"
