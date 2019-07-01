@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
-const { upload, deleteImg } = require('../../services/handleS3');
+const { uploadImg, deleteImg } = require('../../services/handleS3');
 
-const singleUpload = upload.single('image');
+const singleUpload = uploadImg.single('image');
 
 const api = Router();
 
