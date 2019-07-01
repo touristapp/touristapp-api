@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import Vehicle from '../../database/models/vehicle';
+import Fuel from '../../database/models/fuel';
 
 const api = Router();
 
@@ -17,6 +18,17 @@ api.get("/", async (req, res) => {
 			});
 		});
 });
+
+api.get("/fuel/:id", async (req, res) => {
+    try {
+        const vehicle = await Vehicle.findByPk(req.params.id);
+        const fuel = await Fuel.findByPk(vehicle.id);
+        res.status(200).json({ message: "success", data: fuel });
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ message: "error", error: err.message });
+    }
+})
 
 // get vehicle by id CHECKED
 api.get("/:id", async (req, res) => {
