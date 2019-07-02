@@ -7,7 +7,6 @@ import { uploadImg, deleteImg } from '../../services/handleS3';
 const imageUpload = uploadImg.single('image');
 const api = Router();
 
-// get user by id CHECKED
 api.get("/:id", async (req, res) => {
 	await User.findByPk(req.params.id)
 		.then(data => {

@@ -5,7 +5,6 @@
   "main": "server.js",
   "scripts": {
     "test": "jest --no-cache ./tests/*",
-    "mocha": "mocha --require @babel/register 'tests/apiTest.js'",
     "start": "nodemon ./server.js --exec babel-node"
   },
   "repository": {
