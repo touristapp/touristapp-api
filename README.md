@@ -65,8 +65,8 @@ URI = db_url
 |--------------|--------------------------------|-----------------------------------------------------------|-------|------|
 | **GET**      | `/api/travel/`                 | { UserId, done }                                          | token | no   |
 | **GET**      | `/api/travel/:id`              |                                                           | token | no   |
-| **POST**     | `/api/travel/`                 | { UserId, departure, destination, carbonFootprint, distance, duration, id_vehicle } | token | no   |
-| **PUT**      | `/api/travel/:id`              | { UserId, departure, destination, carbonFootprint, distance, duration, id_vehicle } | token | no   |
+| **POST**     | `/api/travel/`                 | { UserId, departure, destination, carbonFootprint, distance, duration, VehicleId } | token | no   |
+| **PUT**      | `/api/travel/:id`              | { UserId, departure, destination, carbonFootprint, distance, duration, VehicleId } | token | no   |
 | **DELETE**   | `/api/travel/`                 | { UserId, done }                                          | token | no   |
 | **DELETE**   | `/api/travel/:id`              |                                                           | token | no   |
 

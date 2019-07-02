@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import Travel from '../../database/models/travel';
+import Vehicle from '../../database/models/vehicle';
 
 const api = Router();
 
@@ -11,7 +12,7 @@ api.get("/", async (req, res) => {
 			});
 		})
 		.catch(err => {
-			res.status(500).json({
+			res.status(400).json({
 				error: err.message
 			});
 		});
@@ -27,7 +28,7 @@ api.get("/:id", async (req, res) => {
 			});
 		})
 		.catch(err => {
-			res.status(500);
+			res.status(400);
 			res.json({
 				err: err.message
 			});
@@ -35,10 +36,22 @@ api.get("/:id", async (req, res) => {
 });
 
 api.post("/", async (req, res) => {
-    const { deparature, destination, carbonFootprint, distance, duration, VehicleId, UserId } = req.body;
+    const { departure, destination, carbonFootprint, distance, duration, VehicleId, UserId } = req.body;
     try {
+        if ( departure == "" || destination == "" || carbonFootprint == "" || distance == "" || duration == "" || VehicleId == "" || UserId == "" ) {
+            return res.status(400).json({ message: "error", error: "all fields need to be fill" })
+        }
+        if ( departure == null || destination == null || carbonFootprint == null || distance == null || duration == null || VehicleId == null || UserId == null ) {
+            return res.status(400).json({ message: "error", error: "all fields are required" })
+        }
+
+        const vehicle = await Vehicle.findByPk(VehicleId)
+        if ( vehicle == null ) {
+            return res.status(400).json({ message: "error", error: "this vehicle don't exist" })
+        }
+
         const travel = new Travel ({
-            deparature, 
+            departure, 
             destination, 
             carbonFootprint, 
             distance, 
@@ -47,23 +60,23 @@ api.post("/", async (req, res) => {
             UserId
         });
         travel.save();
-        res.status(201).json({ message: "success", data: { data } });
+        res.status(201).json({ message: "success", data: { travel } });
 
     } catch (err) {
-        res.status(500).json({ message: "error", error: err.message});
+        res.status(400).json({ message: "error", error: err.message});
     }
 })
 
 //modify travel by id
 api.put("/:id", async (req, res)=>{
-    const { deparature, destination, carbonFootprint, distance, duration, VehicleId } = req.body;
+    const { departure, destination, carbonFootprint, distance, duration, VehicleId } = req.body;
     await Travel.update({
-        deparature: req.body.deparature,
-        destination: req.body.destination,
-        carbonFootprint: req.body.carbonFootprint,
-        distance: req.body.distance,
-        duration: req.body.duration,
-        VehicleId: req.body.VehicleId,
+        departure,
+        destination,
+        carbonFootprint,
+        distance,
+        duration,
+        VehicleId,
         updatedAt: updatedAt
     }, {
         where: {ID: req.params.id}, 
@@ -73,7 +86,7 @@ api.put("/:id", async (req, res)=>{
         res.status(200).json({ message: "success", data: data[1] });
     })
     .catch(function(error) {
-        res.status(500).json({ message: "error",  error: error.message });
+        res.status(400).json({ message: "error",  error: error.message });
     });
 });
 
@@ -86,7 +99,7 @@ api.delete("/:id", async (req, res)=>{
         res.json(data.get({ plain: true }));
     })
     .catch(err => {
-        res.status(500);
+        res.status(400);
         res.json({ error: err.message });
     });
 });
