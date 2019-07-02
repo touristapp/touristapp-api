@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "jest --no-cache ./tests/*",
+    "mocha": "mocha --require @babel/register 'tests/apiTest.js'",
     "start": "nodemon ./server.js --exec babel-node"
   },
   "repository": {
@@ -52,12 +53,13 @@
     "pg": "^7.11.0",
     "request": "^2.88.0",
     "sendgrid": "^5.2.3",
-    "sequelize": "^5.8.2",
-    "supertest": "^4.0.2"
+    "sequelize": "^5.8.2"
   },
   "devDependencies": {
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
-    "sequelize-test-helpers": "^1.1.0"
+    "mocha": "^6.1.4",
+    "sequelize-test-helpers": "^1.1.0",
+    "supertest": "^4.0.2"
   }
 }

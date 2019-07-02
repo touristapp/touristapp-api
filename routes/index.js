@@ -2,6 +2,8 @@ import { Router } from "express";
 import secured from "./secured";
 import auth from "./auth";
 import passport from 'passport';
+import admin from "./secured/admin";
+import user from "./secured/user";
 
 const api = Router();
 
@@ -16,11 +18,8 @@ api.get("/", (req, res) => {
 });
 
 api.use("/auth", auth)
-<<<<<<< HEAD
+api.use("/admin", admin)
+api.use("/user", user)
 api.use("/", passport.authenticate("jwt", { session: false }), secured);
-=======
-api.use("/", secured);
-// api.use("/", passport.authenticate("jwt", { session: false }), secured);
->>>>>>> feat (tests) simple base
 
 export default api;

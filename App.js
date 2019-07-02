@@ -5,6 +5,8 @@ import cors from "cors";
 import marked from "marked";
 import fs from "fs";
 import api from "./routes"
+import "./middleware/passport"
+
 
 const app = express();
 
