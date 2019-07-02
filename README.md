@@ -93,7 +93,7 @@ URI = db_url
 |--------------|--------------------------------|-----------------------------------------------------------|-------|------|
 | **GET**      | `/api/fuel/`                   |                                                           | token | yes   |
 | **GET**      | `/api/fuel/:id`                |                                                           | token | yes   |
-| **POST**     | `/api/fuel/`                   | { name, carbonFootprint }                                 | token | yes   |
+| **POST**     | `/api/fuel/`                   | { name, carbonFootprint, unit }                           | token | yes   |
 | **DELETE**   | `/api/fuel/:id`                |                                                           | token | yes   |
 
 ---
