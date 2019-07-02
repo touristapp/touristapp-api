@@ -19,7 +19,7 @@ api.get("/", (req, res) => {
 
 api.use("/auth", auth)
 api.use("/admin", admin)
-api.use("/user", user)
+// api.use("/user", user)
 api.use("/", passport.authenticate("jwt", { session: false }), secured);
 
 export default api;

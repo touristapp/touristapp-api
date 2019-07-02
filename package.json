@@ -58,7 +58,6 @@
   "devDependencies": {
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
-    "mocha": "^6.1.4",
     "sequelize-test-helpers": "^1.1.0",
     "supertest": "^4.0.2"
   }
