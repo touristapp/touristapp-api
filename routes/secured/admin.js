@@ -4,20 +4,17 @@ import User from "../../database/models/user";
 const api = Router();
 
 api.get("/users", async (req, res) => {
-	console.log('======== findAll')
-	console.log(User)
-	const result = await User.findAll()
-		// .then(data => {
-		// 	res.json({
-		// 		data
-		// 	});
-		// })
-		// .catch(err => {
-		// 	res.status(500).json({
-		// 		error: err.message
-		// 	});
-		// });
-		res.json({result})
+	await User.findAll()
+		.then(data => {
+			res.json({
+				data
+			});
+		})
+		.catch(err => {
+			res.status(500).json({
+				error: err.message
+			});
+		});
 });
 
 // get user by id
