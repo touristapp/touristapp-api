@@ -51,6 +51,7 @@ URI = db_url
 |--------------|--------------------------------|-----------------------------------------------------------|-------|------|
 | **GET**      | `/api/user/:id`                |                                                           | token | yes  |
 | **GET**      | `/api/user/vehicle/:id`        |                                                           | token | yes  |
+| **GET**      | `/api/user/travel/:id`         |                                                           | token | yes  |
 | **PUT**      | `/api/user/:id`                | { name, email }                                           | token | yes  |
 | **PUT**      | `/api/user/vehicle/:id`        | { conso, FuelId }                                         | token | yes  |
 | **PUT**      | `/api/user/updatepassword/:id` | { old\_password, password, password\_confirmation }       | token | yes  |
@@ -64,9 +65,10 @@ URI = db_url
 | method       | endpoint                       | body                                                      |  auth | done |
 |--------------|--------------------------------|-----------------------------------------------------------|-------|------|
 | **GET**      | `/api/travel/`                 | { UserId, done }                                          | token | no   |
-| **GET**      | `/api/travel/:id`              |                                                           | token | no   |
-| **POST**     | `/api/travel/`                 | { UserId, departure, destination, carbonFootprint, distance, duration, VehicleId } | token | no   |
-| **PUT**      | `/api/travel/:id`              | { UserId, departure, destination, carbonFootprint, distance, duration, VehicleId } | token | no   |
+| **GET**      | `/api/travel/:id`              |                                                           | token | yes  |
+| **POST**     | `/api/travel/`                 | { UserId, departure, destination, carbonFootprint, distance, duration, VehicleId } | token | yes  |
+| **PUT**      | `/api/travel/:id`              | { UserId, departure, destination, carbonFootprint, distance, duration, VehicleId } | token | yes  |
+| **PUT**      | `/api/travel/done/:id`         |                                                           | token | yes
 | **DELETE**   | `/api/travel/`                 | { UserId, done }                                          | token | no   |
 | **DELETE**   | `/api/travel/:id`              |                                                           | token | no   |
 
@@ -77,8 +79,8 @@ URI = db_url
 | method       | endpoint                       | body                                                      |  auth | done |
 |--------------|--------------------------------|-----------------------------------------------------------|-------|------|
 | **GET**      | `/api/vehicle/:id`             |                                                           | token | yes  |
-| **POST**     | `/api/vehicle/`                | { FuelId, conso }                                         | token | yes  |
-| **PUT**      | `/api/vehicle/:id`             | { FuelId, conso }                                         | token | yes  |
+| **POST**     | `/api/vehicle/`                | { name, FuelId, conso }                                   | token | yes  |
+| **PUT**      | `/api/vehicle/:id`             | { name, FuelId, conso }                                   | token | yes  |
 | **DELETE**   | `/api/vehicle/:id`             |                                                           | token | no   |
 
 ---
