@@ -19,7 +19,7 @@ const fileFilter = (req, file, cb) => {
   }
 }
 
-const upload = multer({
+const uploadImg = multer({
   fileFilter,
   limits: {
     fileSize: 1024 * 1024 * 5 // we are allowing only 5 MB files
@@ -44,4 +44,4 @@ const deleteImg = async (imgKey) => {
     },function (err,data){})
 }
 
-module.exports = { upload, deleteImg };
+module.exports = { uploadImg, deleteImg };

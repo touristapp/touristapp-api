@@ -57,6 +57,8 @@ URI = db_url
 | **PUT**      | `/api/user/updatepassword/:id` | { old\_password, password, password\_confirmation }       | token | yes  |
 | **PUT**      | `/api/user/recreatepassword`   | { email }                                                 | none  | no   |
 | **DELETE**   | `/api/user/:id`                |                                                           | token | yes  |
+| **POST**     | `/api/user/addImage/:id`       |                                                           | token | yes  |
+| **DELETE**   | `/api/user/deleteImage/:fileKey`|                                                          | token | yes  |
 
 ---
 
