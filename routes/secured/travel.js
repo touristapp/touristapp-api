@@ -7,14 +7,10 @@ const api = Router();
 api.get("/", async (req, res) => {
 	await Travel.findAll()
 		.then(data => {
-			res.json({
-				data
-			});
+			res.json({ message: "success", data: { data } });
 		})
 		.catch(err => {
-			res.status(400).json({
-				error: err.message
-			});
+			res.status(400).json({ error: err.message });
 		});
 });
 
@@ -23,15 +19,11 @@ api.get("/:id", async (req, res) => {
 	await Travel.findByPk(req.params.id)
 		.then(data => {
 			res.status(200);
-			res.json({
-				data
-			});
+			res.json({ message: "success", data: { data } });
 		})
 		.catch(err => {
 			res.status(400);
-			res.json({
-				err: err.message
-			});
+			res.json({ err: err.message });
 		});
 });
 
@@ -76,10 +68,9 @@ api.put("/:id", async (req, res)=>{
         carbonFootprint,
         distance,
         duration,
-        VehicleId,
-        updatedAt: updatedAt
+        VehicleId
     }, {
-        where: {ID: req.params.id}, 
+        where: {id: req.params.id}, 
         returning: true, plain: true
     })
     .then(function(data) {
@@ -89,6 +80,21 @@ api.put("/:id", async (req, res)=>{
         res.status(400).json({ message: "error",  error: error.message });
     });
 });
+
+api.put("/done/:id", async (req, res) => {
+    await Travel.update({
+        done: true
+    }, {
+        where: { id: req.params.id },
+        returning: true, plain: true
+    })
+    .then((data) => {
+        res.status(200).json({ message: "success", data: data[1] });
+    })
+    .catch((err) => {
+        res.status(500).json({ message: "error", error: err.message });
+    })
+})
 
 //delete travel by id
 api.delete("/:id", async (req, res)=>{

@@ -2,7 +2,9 @@ import { Router } from "express";
 import User from "../../database/models/user";
 import Vehicle from "../../database/models/vehicle";
 import jwt from 'jsonwebtoken';
+import Travel from "../../database/models/travel";
 import { uploadImg, deleteImg } from '../../services/handleS3';
+
 
 const imageUpload = uploadImg.single('image');
 const api = Router();
@@ -30,9 +32,19 @@ api.get("/vehicle/:id", async (req, res) => {
 
 		res.status(200).json({ message: "success", data: vehicle })
 	} catch (err) {
-		res.status(501).json({ message: "error", error: err.stack  })
+		res.status(400).json({ message: "error", error: { err } })
 	}
 });
+
+api.get("/travel/:id", async (req, res) => {
+	try {
+		const travels = await Travel.findAll({ where: { UserId: req.params.id }});
+
+		res.status(200).json({ message: "success", data: travels});
+	} catch (err) {
+		res.status(400).json({message: "error", error: { err }})
+	}
+})
 
 api.put("/:id", async (req, res) => {
 	let bearerHeader = req.headers.authorization.replace('Bearer ','')
