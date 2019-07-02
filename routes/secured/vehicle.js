@@ -49,9 +49,10 @@ api.get("/:id", async (req, res) => {
 
 // post vehicle CHECKED
 api.post("/", async (req, res) => {
-    const { FuelId, conso } = req.body
+    const { name, FuelId, conso } = req.body
     try {
         const vehicle = new Vehicle ({
+            name,
             FuelId,
             conso
         })
@@ -64,10 +65,11 @@ api.post("/", async (req, res) => {
 
 // modify vehicle by id CHECKED
 api.put("/:id", async (req, res)=>{
-    const { FuelId, conso } = req.body
+    const { name, FuelId, conso } = req.body
     await Vehicle.update({
-            conso: req.body.conso,
-            FuelId: req.body.FuelId
+            name,
+            conso,
+            FuelId
         }, { 
             where: { id: req.params.id }, 
             returning: true, plain: true 
