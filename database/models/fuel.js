@@ -11,6 +11,10 @@ export default class Fuel extends Model {
         carbonFootprint: {
           type: Sequelize.NUMERIC,
         },
+        unit: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
         createdAt: {
           type: Sequelize.DATE(3),
           defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3)')
