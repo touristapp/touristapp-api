@@ -2,8 +2,6 @@ import { Router } from "express";
 import secured from "./secured";
 import auth from "./auth";
 import passport from 'passport';
-import admin from "./secured/admin";
-import user from "./secured/user";
 
 const api = Router();
 
