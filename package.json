@@ -1,6 +1,9 @@
 {
   "name": "touristapp_server",
   "version": "1.0.0",
+  "engine": {
+    "node": "10.3.0"
+  },
   "description": "this app purpose is to help users to acknowledge their carbon footprint during their travels/commutes. ",
   "main": "server.js",
   "scripts": {
