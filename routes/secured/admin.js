@@ -4,7 +4,6 @@ import User from "../../database/models/user";
 const api = Router();
 
 api.get("/users", async (req, res) => {
-  console.log('======== findAll')
 	await User.findAll()
 		.then(data => {
 			res.json({

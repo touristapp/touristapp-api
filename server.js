@@ -2,7 +2,6 @@ import iconv from 'iconv-lite';
 import encodings from 'iconv-lite/encodings';
 import app from './App';
 import { db } from './database/initdb';
-import "./middleware/passport"
 
 iconv.encodings = encodings;
 require('dotenv').config();
