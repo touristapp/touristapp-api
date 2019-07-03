@@ -11,8 +11,16 @@
 ```
 NODE_ENV=dev
 PORT= YOUR_PORT
-
 URI = db_url
+DB_USER="..."
+DB_PASSWORD="..."
+SUPERSECRET="..."
+
+#AWS S3
+AWS_S3_BUCKET="..."
+AWS_S3_REGION="..."
+AWS_S3_SECRET_ACCESS_KEY="..."
+AWS_S3_ACCESS_KEY_ID="..."
 ```
 
 #### config.json
