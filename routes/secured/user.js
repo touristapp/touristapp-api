@@ -170,7 +170,7 @@ api.post('/addImage/:id', (req, res) => {
 			return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}]});
 		}
 		await User.update({ 
-			picture: "req.file.location",
+			picture: req.file.location,
 			password: "fake_password",
 			password_confirmation: "fake_password",
 		}, {
