@@ -2,8 +2,20 @@ const api = require('../routes');
 const app = require('../App');
 import request from 'supertest';
 
-var server = request.agent("https://touristapi.herokuapp.com");
-// var server = request.agent("http://localhost:8080");
+require('dotenv').config();
+
+let url;
+const port = process.env.PORT || 8080 ;
+
+switch  (process.env.NODE_ENV){
+    case "prod":
+        url = "https://touristapi.herokuapp.com"
+        break;
+    default:
+        url = `http://localhost:${port}`;
+}
+
+var server = request.agent(url);
 
 const user = {
     email: "benbeni@gmail.com",
