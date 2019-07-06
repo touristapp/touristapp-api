@@ -9,7 +9,8 @@ const port = process.env.PORT || 8080 ;
 
 switch  (process.env.NODE_ENV){
     case "prod":
-        url = "https://touristapi.herokuapp.com"
+        //url = "https://touristapi.herokuapp.com"
+        url = `http://localhost:${port}`;
         break;
     default:
         url = `http://localhost:${port}`;
