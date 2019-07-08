@@ -176,14 +176,10 @@ api.delete("/:id", async (req, res) => {
 		})
 })
 
-// HANDLE USER IMAGE
 api.post('/addImage/:id', (req, res) => {
     imageUpload(req, res, async (err) => {
-		console.log("I AM HERE")
 		if (err) {
-			console.log("ERROR in image uploading");
-			console.log(err.message);
-			console.log(req.file.location);
+			console.log("ERROR in image uploading: ", err.message);
 			return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}]});
 		}
 		await User.update({
@@ -196,13 +192,10 @@ api.post('/addImage/:id', (req, res) => {
 		})
 		.then(() => {
 			console.log("SUCCESS in updating user with image");
-			console.log("file location --> ")	    ;
-			console.log(req.file.location);
 			res.status(200).json({ message: "success", imageUrl: req.file.location });
 		})
 		.catch((err) => {
-			console.log("ERROR in updating user with image");
-			console.log(err.stack);
+			console.log("ERROR in updating user with image: ", err.stack);
 			res.status(503).json({ message: "error", error: err.stack });
 		})
 	});
