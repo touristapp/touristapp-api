@@ -6,7 +6,7 @@
 
 ### Config Vars
 
-#### .env 
+#### .env
 
 ```
 NODE_ENV=dev
@@ -60,7 +60,7 @@ AWS_S3_ACCESS_KEY_ID="..."
 | **GET**      | `/api/user/:id`                |                                                           | token | yes  |
 | **GET**      | `/api/user/vehicle/:id`        |                                                           | token | yes  |
 | **PUT**      | `/api/user/:id`                | { name, email }                                           | token | yes  |
-| **PUT**      | `/api/user/vehicle/:id`        | { conso, FuelId }                                         | token | yes  |
+| **PUT**      | `/api/user/vehicle/:id`        | { vehicleId, name, conso, FuelId }                                         | token | yes  |
 | **PUT**      | `/api/user/updatepassword/:id` | { old\_password, password, password\_confirmation }       | token | yes  |
 | **PUT**      | `/api/user/recreatepassword`   | { email }                                                 | none  | no   |
 | **DELETE**   | `/api/user/:id`                |                                                           | token | yes  |

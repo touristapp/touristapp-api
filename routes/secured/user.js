@@ -1,4 +1,4 @@
-import { Router } from "express"; 
+import { Router } from "express";
 import User from "../../database/models/user";
 import Vehicle from "../../database/models/vehicle";
 import jwt from 'jsonwebtoken';
@@ -54,13 +54,13 @@ api.put("/:id", async (req, res) => {
 		} else {
 			const { name, email } = req.body;
 
-			await User.update({ 
+			await User.update({
 					name,
 					email,
 					password: "fake_password",
 					password_confirmation: "fake_password",
 				}, {
-					where: { id: req.params.id }, 
+					where: { id: req.params.id },
 					returning: true, plain: true
 				})
 				.then((data) => {
@@ -81,40 +81,53 @@ api.put("/vehicle/:id", async (req, res) => {
 		if (err) {
 			res.status(501).json({ message: "error", error: { err} });
 		} else {
-			const { conso, FuelId } = req.body;
+			const { vehicleId, name, conso, FuelId } = req.body;
 
-			let vehicle = await Vehicle.findOne({ where: { FuelId, conso }});
+			let vehicle = Vehicle.findOne({ where: { id: vehicleId }}).then( async vehicle => {
+				if (!vehicle) {
+					console.log('********* VEHICLE NOT FOUND ************');
+					try {
+						const newvehicle = new Vehicle ({
+							name,
+							FuelId,
+							conso
+						})
+						await newvehicle.save();
 
-			if (!vehicle) {
-				try {
-					const newvehicle = new Vehicle ({
-						FuelId, 
-						conso
+						await User.update({
+							VehicleId: newvehicle.id,
+							password: "fake_password",
+							password_confirmation: "fake_password",
+						}, {
+							where: { id: req.params.id },
+							returning: true, plain: true
+						})
+						.then( (data) => {
+							const payload = { id: data.id, name: data.name, email: data.email };
+							const token = jwt.sign(payload, process.env.SUPERSECRET);
+							res.status(200).json({ message: "success", data: data[1], meta: bearerHeader });
+						})
+						.catch((err) => {
+							console.log(err)
+							res.status(503).json({ message: "error", error: err.stack });
+						})
+					} catch (error) {
+						res.status(502).json({ message: "error", error: err.stack  });
+					}
+				} else {
+					console.log('********* VEHICLE FOUND ************');
+					await Vehicle.update({
+						name: name,
+						conso: conso,
+						FuelId: FuelId
+					}, {
+						where: { id: vehicleId },
+						returning: true, plain: true
+					}).then( updated => {
+						res.status(200).json({ message: "success", data: updated[1] , meta: bearerHeader});
 					})
-					await newvehicle.save();
-					vehicle = newvehicle;
-				} catch (error) {
-					res.status(502).json({ message: "error", error: err.stack  });
 				}
-			}
-
-			await User.update({ 
-					VehicleId: vehicle.id,
-					password: "fake_password",
-					password_confirmation: "fake_password",
-				}, {
-					where: { id: req.params.id }, 
-					returning: true, plain: true
-				})
-				.then((data) => {
-					const payload = { id: data.id, name: data.name, email: data.email };
-					const token = jwt.sign(payload, process.env.SUPERSECRET);
-					res.status(200).json({ message: "success", data: data[1] , meta: token});
-				})
-				.catch((err) => {
-					console.log(err)
-					res.status(503).json({ message: "error", error: err.stack });
-				})
+			});
 		}
 	});
 })
@@ -128,7 +141,7 @@ api.put("/updatepassword/:id", async (req, res) => {
 			const { password, password_confirmation, current_password } = req.body;
 			const old_user = await User.findByPk(req.params.id);
 			if ((await old_user.checkPassword(current_password))) {
-				await old_user.update({ 
+				await old_user.update({
 						password,
 						password_confirmation,
 					}, {
@@ -173,12 +186,12 @@ api.post('/addImage/:id', (req, res) => {
 			console.log(req.file.location);
 			return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}]});
 		}
-		await User.update({ 
+		await User.update({
 			picture: req.file.location,
 			password: "fake_password",
 			password_confirmation: "fake_password",
 		}, {
-			where: { id: req.params.id }, 
+			where: { id: req.params.id },
 			returning: true, plain: true
 		})
 		.then(() => {
