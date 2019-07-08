@@ -73,7 +73,8 @@ AWS_S3_ACCESS_KEY_ID="..."
 
 | method       | endpoint                       | body                                                      |  auth | done |
 |--------------|--------------------------------|-----------------------------------------------------------|-------|------|
-| **GET**      | `/api/travel`                  | { UserId, done }                                          | token | yes  |
+| **GET**      | `/api/travel/voyage/:UserId`   |                                                           | token | yes  |
+| **GET**      |`/api/travel/itineraire/:UserId`|                                                           | token | yes  |
 | **GET**      | `/api/travel/:id`              |                                                           | token | yes  |
 | **POST**     | `/api/travel/`                 | { UserId, departure, destination, carbonFootprint, distance, duration, VehicleId } | token | yes  |
 | **PUT**      | `/api/travel/:id`              | { UserId, departure, destination, carbonFootprint, distance, duration, VehicleId } | token | yes  |

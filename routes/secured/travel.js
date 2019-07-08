@@ -4,8 +4,18 @@ import Vehicle from '../../database/models/vehicle';
 
 const api = Router();
 
-api.get("/", async (req, res) => {
-	await Travel.findAll({ where: { UserId: req.query.UserId, done: req.query.done }})
+api.get("/voyage/:UserId", async (req, res) => {
+	await Travel.findAll({ where: { UserId: req.params.UserId, done: true }})
+		.then(data => {
+			res.json({ message: "success", data: { data } });
+		})
+		.catch(err => {
+			res.status(400).json({ error: err.message });
+		});
+});
+
+api.get("/itineraire/:UserId", async (req, res) => {
+	await Travel.findAll({ where: { UserId: req.params.UserId, done: false }})
 		.then(data => {
 			res.json({ message: "success", data: { data } });
 		})
@@ -15,7 +25,7 @@ api.get("/", async (req, res) => {
 });
 
 // get travel by id
-api.get("/:id", async (req, res) => {
+api.get("/:idTravel", async (req, res) => {
 	await Travel.findByPk(req.params.id)
 		.then(data => {
 			res.status(200);
@@ -60,7 +70,7 @@ api.post("/", async (req, res) => {
 })
 
 //modify travel by id
-api.put("/:id", async (req, res)=>{
+api.put("/:idTravel", async (req, res)=>{
     const { departure, destination, carbonFootprint, distance, duration, VehicleId } = req.body;
     await Travel.update({
         departure,
@@ -81,7 +91,7 @@ api.put("/:id", async (req, res)=>{
     });
 });
 
-api.put("/done/:id", async (req, res) => {
+api.put("/done/:idTravel", async (req, res) => {
     await Travel.update({
         done: true
     }, {
@@ -97,7 +107,7 @@ api.put("/done/:id", async (req, res) => {
 })
 
 //delete travel by id
-api.delete("/:id", async (req, res)=>{
+api.delete("/:idTravel", async (req, res)=>{
     await Travel.destroy({where: { ID: req.params.id }
     })
     .then(data => {
