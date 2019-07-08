@@ -83,6 +83,12 @@ api.put("/vehicle/:id", async (req, res) => {
 		} else {
 			const { vehicleId, name, conso, FuelId } = req.body;
 
+			console.log(`vehicleId : ${vehicleId}`);
+			console.log(`name : ${name}`);
+			console.log(`conso : ${conso}`);
+			console.log(`FuelId : ${FuelId}`);
+			console.log(`params id : ${req.params.id}`);
+
 			let vehicle = Vehicle.findOne({ where: { id: vehicleId }}).then( async vehicle => {
 				if (!vehicle) {
 					console.log('********* VEHICLE NOT FOUND ************');
@@ -116,6 +122,7 @@ api.put("/vehicle/:id", async (req, res) => {
 					}
 				} else {
 					console.log('********* VEHICLE FOUND ************');
+					console.log(`vehicleId if found : ${vehicleId}`);
 					await Vehicle.update({
 						name: name,
 						conso: conso,
