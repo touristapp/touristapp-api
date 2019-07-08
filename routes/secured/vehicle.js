@@ -22,7 +22,7 @@ api.get("/", async (req, res) => {
 api.get("/fuel/:id", async (req, res) => {
     try {
         const vehicle = await Vehicle.findByPk(req.params.id);
-        const fuel = await Fuel.findByPk(vehicle.id);
+        const fuel = await Fuel.findByPk(vehicle.FuelId);
         res.status(200).json({ message: "success", data: fuel });
     } catch (err) {
         console.log(err)
@@ -70,9 +70,9 @@ api.put("/:id", async (req, res)=>{
             name,
             conso,
             FuelId
-        }, { 
-            where: { id: req.params.id }, 
-            returning: true, plain: true 
+        }, {
+            where: { id: req.params.id },
+            returning: true, plain: true
         })
         .then((data) => {
             res.status(200).json({ message: "success", data: data[1] })
