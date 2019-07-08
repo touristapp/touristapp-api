@@ -38,4 +38,4 @@ jobs:
             - ./node_modules
           key: dependency-cache-{{ checksum "package.json" }}
 
-      #- run: npm test
+      - run: npm test
