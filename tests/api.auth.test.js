@@ -38,7 +38,7 @@ beforeAll((done) => {
             if (err){
                 done(err);
             }
-            token = "ifuehzfzererfe";
+            token = res.body.meta.token;
             done();
         })
 });
