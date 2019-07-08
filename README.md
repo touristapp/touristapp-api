@@ -59,7 +59,6 @@ AWS_S3_ACCESS_KEY_ID="..."
 |--------------|--------------------------------|-----------------------------------------------------------|-------|------|
 | **GET**      | `/api/user/:id`                |                                                           | token | yes  |
 | **GET**      | `/api/user/vehicle/:id`        |                                                           | token | yes  |
-| **GET**      | `/api/user/travel/:id`         |                                                           | token | yes  |
 | **PUT**      | `/api/user/:id`                | { name, email }                                           | token | yes  |
 | **PUT**      | `/api/user/vehicle/:id`        | { conso, FuelId }                                         | token | yes  |
 | **PUT**      | `/api/user/updatepassword/:id` | { old\_password, password, password\_confirmation }       | token | yes  |
@@ -74,7 +73,7 @@ AWS_S3_ACCESS_KEY_ID="..."
 
 | method       | endpoint                       | body                                                      |  auth | done |
 |--------------|--------------------------------|-----------------------------------------------------------|-------|------|
-| **GET**      | `/api/travel/`                 | { UserId, done }                                          | token | no   |
+| **GET**      | `/api/travel/`                 | { UserId, done }                                          | token | yes  |
 | **GET**      | `/api/travel/:id`              |                                                           | token | yes  |
 | **POST**     | `/api/travel/`                 | { UserId, departure, destination, carbonFootprint, distance, duration, VehicleId } | token | yes  |
 | **PUT**      | `/api/travel/:id`              | { UserId, departure, destination, carbonFootprint, distance, duration, VehicleId } | token | yes  |

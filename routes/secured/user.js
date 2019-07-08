@@ -36,15 +36,15 @@ api.get("/vehicle/:id", async (req, res) => {
 	}
 });
 
-api.get("/travel/:id", async (req, res) => {
-	try {
-		const travels = await Travel.findAll({ where: { UserId: req.params.id }});
+// api.get("/travel/:id", async (req, res) => {
+// 	try {
+// 		const travels = await Travel.findAll({ where: { UserId: req.params.id }});
 
-		res.status(200).json({ message: "success", data: travels});
-	} catch (err) {
-		res.status(400).json({message: "error", error: { err }})
-	}
-})
+// 		res.status(200).json({ message: "success", data: travels});
+// 	} catch (err) {
+// 		res.status(400).json({message: "error", error: { err }})
+// 	}
+// })
 
 api.put("/:id", async (req, res) => {
 	let bearerHeader = req.headers.authorization.replace('Bearer ','')
