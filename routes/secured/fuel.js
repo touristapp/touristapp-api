@@ -7,7 +7,6 @@ const api = Router();
 api.get("/", async (req, res) => {
 	await Fuel.findAll()
 		.then(data => {
-			console.log(data);
 			res.json({
 				data
 			});
@@ -53,8 +52,8 @@ api.post("/", async(req, res) => {
 //delete fuel by id --> CHECKED
 api.delete("/:id", async (req, res)=>{
 	const { id } = req.params;
-	if (isNaN(id)){ 
-		res.status(404).send(`ERROR: ID must be a number`) 
+	if (isNaN(id)){
+		res.status(404).send(`ERROR: ID must be a number`)
 	}
 	else {
 		const fuelToDelete = await Fuel.findByPk(id);
