@@ -9,21 +9,21 @@ import { uploadImg, deleteImg } from '../../services/handleS3';
 const imageUpload = uploadImg.single('image');
 const api = Router();
 
-api.get("/:id", async (req, res) => {
-	await User.findByPk(req.params.id)
-		.then(data => {
-			res.status(200);
-			res.json({
-				data
-			});
-		})
-		.catch(err => {
-			res.status(500);
-			res.json({
-				err: err.message
-			});
-		});
-});
+// api.get("/:id", async (req, res) => {
+// 	await User.findByPk(req.params.id)
+// 		.then(data => {
+// 			res.status(200);
+// 			res.json({
+// 				data
+// 			});
+// 		})
+// 		.catch(err => {
+// 			res.status(500);
+// 			res.json({
+// 				err: err.message
+// 			});
+// 		});
+// });
 
 api.get("/vehicle/:id", async (req, res) => {
 	try {
