@@ -7,6 +7,8 @@ require('dotenv').config();
 let url;
 const port = process.env.PORT || 8080 ;
 
+console.log(process.env.NODE_ENV)
+
 switch  (process.env.NODE_ENV){
     case "prod":
         url = "https://touristapi.herokuapp.com"
