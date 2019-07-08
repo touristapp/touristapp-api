@@ -184,6 +184,8 @@ api.post('/addImage/:id', (req, res) => {
 			res.status(200).json({ message: "success", imageUrl: req.file.location });
 		})
 		.catch((err) => {
+			console.log("ERROR: post image")
+			console.log(err.stack)
 			res.status(503).json({ message: "error", error: err.stack });
 		})
 	});
