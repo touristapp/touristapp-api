@@ -75,12 +75,11 @@ AWS_S3_ACCESS_KEY_ID="..."
 |--------------|--------------------------------|-----------------------------------------------------------|-------|------|
 | **GET**      | `/api/travel/voyage/:UserId`   |                                                           | token | yes  |
 | **GET**      |`/api/travel/itineraire/:UserId`|                                                           | token | yes  |
-| **GET**      | `/api/travel/:id`              |                                                           | token | yes  |
+| **GET**      | `/api/travel/:idTravel`        |                                                           | token | yes  |
 | **POST**     | `/api/travel/`                 | { UserId, departure, destination, carbonFootprint, distance, duration, VehicleId } | token | yes  |
-| **PUT**      | `/api/travel/:id`              | { UserId, departure, destination, carbonFootprint, distance, duration, VehicleId } | token | yes  |
-| **PUT**      | `/api/travel/done/:id`         |                                                           | token | yes
-| **DELETE**   | `/api/travel/`                 | { UserId, done }                                          | token | no   |
-| **DELETE**   | `/api/travel/:id`              |                                                           | token | no   |
+| **PUT**      | `/api/travel/:idTravel`        | { UserId, departure, destination, carbonFootprint, distance, duration, VehicleId } | token | yes  |
+| **PUT**      | `/api/travel/done/:idTravel`   |                                                           | token | yes |
+| **DELETE**   | `/api/travel/:id`              |                                                           | token | yes |
 
 ---
 
