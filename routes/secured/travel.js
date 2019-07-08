@@ -5,7 +5,7 @@ import Vehicle from '../../database/models/vehicle';
 const api = Router();
 
 api.get("/", async (req, res) => {
-	await Travel.findAll({ where: { UserId: req.body.UserId, done: req.body.done }})
+	await Travel.findAll({ where: { UserId: req.query.UserId, done: req.query.done }})
 		.then(data => {
 			res.json({ message: "success", data: { data } });
 		})

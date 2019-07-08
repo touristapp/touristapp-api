@@ -27,6 +27,7 @@ export default class Travel extends Model {
 
             done: {
                 type: Sequelize.BOOLEAN,
+                defaultValue: false,
             },
 
             createdAt: {
