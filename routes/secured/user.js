@@ -178,6 +178,9 @@ api.post('/addImage/:id', (req, res) => {
 			returning: true, plain: true
 		})
 		.then(() => {
+			console.log("SUCCESS: post image")
+			console.log("file location --> ")	    
+			console.log(req.file.location)
 			res.status(200).json({ message: "success", imageUrl: req.file.location });
 		})
 		.catch((err) => {
