@@ -166,6 +166,7 @@ api.delete("/:id", async (req, res) => {
 // HANDLE USER IMAGE
 api.post('/addImage/:id', (req, res) => {
     imageUpload(req, res, async (err) => {
+		console.log("I AM HERE")
 		if (err) {
 			console.log("ERROR in image uploading");
 			console.log(err.message);
