@@ -16,7 +16,7 @@ switch  (process.env.NODE_ENV){
         url = `http://localhost:${port}`;
 }
 
-var server = request.agent(url);
+var server = request.agent("https://touristapi.herokuapp.com");
 
 const user = {
     email: "benbeni@gmail.com",
@@ -34,10 +34,10 @@ beforeAll((done) => {
           })
         .expect(200)
         .end(function(err, res) {
+            console.log(res.body);
             if (err){
                 done(err);
             }
-            console.log(res.body);
             token = "ifuehzfzererfe";
             done();
         })
