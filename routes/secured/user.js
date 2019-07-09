@@ -149,8 +149,8 @@ api.put("/updatepassword/:id", async (req, res) => {
 						res.status(200).json({ message: "success" });
 					})
 					.catch((err) => {
-						console.log(err)
-						res.status(503).json({ message: "error", error: err.stack });
+						console.log(err.message)
+						res.status(503).json({ message: "error", error: err.message });
 					})
 			} else {
 				res.status(400).json({ message: "error", error: "Old password is incorrect." })
