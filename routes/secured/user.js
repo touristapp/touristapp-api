@@ -131,14 +131,14 @@ api.put("/vehicle/:id", async (req, res) => {
 })
 
 api.put("/updatepassword/:id", async (req, res) => {
-	let bearerHeader = req.headers.authorization.replace('Bearer ','')
-	jwt.verify(bearerHeader, process.env.SUPERSECRET, async (err,decoded) => {
+	let token = req.headers.authorization.replace('Bearer ','')
+	jwt.verify(token, process.env.SUPERSECRET, async (err,decoded) => {
 		if (err) {
-			res.status(501).json({ message: "error", error: { err} });
+			res.status(401).json({ message: "Token error", error: { err} });
 		} else {
-			const { password, password_confirmation, current_password } = req.body;
+			const { password, password_confirmation, old_password } = req.body;
 			const old_user = await User.findByPk(req.params.id);
-			if ((await old_user.checkPassword(current_password))) {
+			if ((await old_user.checkPassword(old_password))) {
 				await old_user.update({
 						password,
 						password_confirmation,
@@ -146,7 +146,7 @@ api.put("/updatepassword/:id", async (req, res) => {
 						returning: true, plain: true
 					})
 					.then((data) => {
-						res.status(200).json({ message: "success", data: data[1]});
+						res.status(200).json({ message: "success" });
 					})
 					.catch((err) => {
 						console.log(err)

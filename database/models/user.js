@@ -82,7 +82,7 @@ export default class User extends Model {
 
       indexes: [
         {
-          unique: true, 
+          unique: true,
           fields: ["email"]
         }
       ],
@@ -114,14 +114,14 @@ export default class User extends Model {
 
   async generateHash() {
     const SALT_ROUND = 5;
-    const hashed = bcrypt.hash(this.password, SALT_ROUND);
-  
-    if (!hashed){
+    const hash = bcrypt.hash(this.password, SALT_ROUND);
+
+    if (!hash){
       throw new Error("Password can't be hashed!");
     }
-    return hashed;
+    return hash;
   }
-  
+
   async checkPassword(password) {
     return bcrypt.compare(password, this.password_digest);
   }
@@ -136,5 +136,3 @@ export default class User extends Model {
     return values;
   }
 }
-
-
