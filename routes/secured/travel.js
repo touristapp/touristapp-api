@@ -26,7 +26,7 @@ api.get("/itineraire/:UserId", async (req, res) => {
 
 // get travel by id
 api.get("/:idTravel", async (req, res) => {
-	await Travel.findByPk(req.params.id)
+	await Travel.findByPk(req.params.idTravel)
 		.then(data => {
 			res.status(200);
 			res.json({ message: "success", data: { data } });
@@ -80,7 +80,7 @@ api.put("/:idTravel", async (req, res)=>{
         duration,
         VehicleId
     }, {
-        where: {id: req.params.id}, 
+        where: {id: req.params.idTravel}, 
         returning: true, plain: true
     })
     .then(function(data) {
@@ -95,7 +95,7 @@ api.put("/done/:idTravel", async (req, res) => {
     await Travel.update({
         done: true
     }, {
-        where: { id: req.params.id },
+        where: { id: req.params.idTravel },
         returning: true, plain: true
     })
     .then((data) => {
@@ -108,7 +108,7 @@ api.put("/done/:idTravel", async (req, res) => {
 
 //delete travel by id
 api.delete("/:idTravel", async (req, res)=>{
-    await Travel.destroy({where: { ID: req.params.id }
+    await Travel.destroy({where: { ID: req.params.idTravel }
     })
     .then(data => {
         res.status(200);
