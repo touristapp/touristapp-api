@@ -47,6 +47,23 @@ api.get("/:id", async (req, res) => {
 		});
 });
 
+// get vehicle by name
+api.get("/name/:name", async (req, res) => {
+	await Vehicle.findOne({where: {name: req.params.name}})
+		.then(data => {
+			res.status(200);
+			res.json({
+				data
+			});
+		})
+		.catch(err => {
+			res.status(500);
+			res.json({
+				err: err.message
+			});
+		});
+});
+
 // post vehicle CHECKED
 api.post("/", async (req, res) => {
     const { name, FuelId, conso } = req.body
