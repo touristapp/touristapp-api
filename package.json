@@ -32,7 +32,7 @@
     "@sendgrid/mail": "^6.4.0",
     "ansi-regex": "^4.1.0",
     "aws-sdk": "^2.485.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "babel-polyfill": "^6.26.0",
     "bcrypt": "^3.0.0",
     "body-parser": "^1.19.0",
