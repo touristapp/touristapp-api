@@ -39,7 +39,7 @@
     "circular-json": "^0.5.9",
     "cors": "^2.8.5",
     "dotenv": "^7.0.0",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "fs": "0.0.1-security",
     "iconv-lite": "^0.4.24",
     "jest": "^24.8.0",
