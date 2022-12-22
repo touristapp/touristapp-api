@@ -43,7 +43,7 @@
     "fs": "0.0.1-security",
     "iconv-lite": "^0.4.24",
     "jest": "^24.8.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "marked": "^0.6.2",
     "multer": "^1.4.1",
     "multer-s3": "^2.9.0",
